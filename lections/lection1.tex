@@ -219,8 +219,8 @@ a_{i} &=\frac{\partial^{2} x_{i}}{\partial t^{2}}
 Отметим, что такому описанию соответствует способ исследования океана (реки Волги) с помощью геофизических буев с нулевой плавучестью.
 \begin{figure}[h]
 	\centering
-	\includegraphics[]{example-image-c}
-	\caption{здесь должна быть картинка Волги}
+	\includegraphics[scale=1]{photo/3.pdf}
+	\caption{Схематичная картина Лагранжева и Эйлерова описания. \ding{58} - якорь.}
 	\label{fig:figure3}
 \end{figure}
 \begin{center}
@@ -251,9 +251,7 @@ a_{i} &=\frac{\partial v_{i}}{\partial t}+v_{k} \frac{\partial v_{i}}{\partial t
 \vec{a} &=\frac{\partial \vec{v}}{\partial t}+(\vec{v} \nabla) \vec{v}=\left(\frac{\partial}{\partial t}+(\vec{v} \nabla)\right) \vec{v}
 \end{align*}
 
-Аналогично находятся и производные от любой другой величины.
-
-Эта производная носит название субстанциональной производной.
+Аналогично находятся и производные от любой другой величины. Эта производная носит название субстанциональной производной.
 \begin{align*} 
 \frac{d}{d t}=\frac{\partial}{\partial t}+(\vec{v} \nabla)
 \end{align*}
@@ -281,17 +279,19 @@ a_{i} &=\frac{\partial v_{i}}{\partial t}+v_{k} \frac{\partial v_{i}}{\partial t
 \begin{align*} 
 m=\int\limits_{V} \rho d V
 \end{align*}
-где $\rho$ - плотность жидкости. Жидкость может притекать и вытекать из объема. Введем элемент поверхности $ d \sigma $ и вектор $ d \vec{\sigma}=d \sigma \vec{n} $, направленный по внешней нормали к поверхности. Поток через элемент поверхности определяется скалярным произведением
+где $\rho$ - плотность жидкости. Жидкость может притекать и вытекать из объема. Введем элемент поверхности $ d \sigma $ и вектор $ d \vec{\sigma}=d \sigma \vec{n} $, направленный по внешней нормали к поверхности. 
+\begin{figure}[h]
+	\vspace{-10pt}
+	\centering
+	\includegraphics[scale=1]{photo/4.pdf}
+	\caption{Объем, скорость и нормаль к поверхности}
+	\label{fig:figure4}
+\end{figure}
+Поток через элемент поверхности определяется скалярным произведением:
 \begin{align*}
 \oint\limits_{S} \rho \vec{v} d \vec{\sigma}=\int\limits_{V} \Div(\rho \vec{v}) d V
 \end{align*}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[]{example-image-c}
-	\caption{Картинка объема скорости и нормали}
-	\label{fig:figure4}
-\end{figure}
 
 Уравнение баланса имеет вид:
 \begin{align*} 

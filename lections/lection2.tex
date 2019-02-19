@@ -1,0 +1,303 @@
+%!TEX root = ../main.tex
+\subsection{Уравнение Эйлера}
+Уравнение движение идеальной жидкости ( аналог \textbf{2 закона Ньютона})
+Второй закон Ньютона для жидкого элемента
+\begin{align*}
+\rho d V \frac{d \vec{v}}{d t} &=\vec{F_{S}}+\vec{F} \\
+\vec { F } &= \rho \vec { f }
+\end{align*}
+Здесь $F$ объемная сила действующая на элемент $dV$ ( $f$ – сила отнесенная к единице массы, для силы тяжести $f=g$, где g ускорение свободного падения).
+
+$F_s$ - сила действующая на элемент объема со стороны окружающей среды.  В идеальной среде силы трения нет и единственная сила определяется только силами давления. На элемент поверхности $d\sigma$ действует сила $ P d \vec { \sigma } $ и результирующая сила равна:
+\begin{align*}
+\vec { F } _ { S } = - \oint \limits_ { S } p d \vec { \sigma } = - \int \limits_ { V } \nabla p d V \approx - \nabla p d V
+\end{align*}
+
+В результате получаем \textbf{уравнение Эйлера}
+\begin{align*}
+\frac { d \vec { v } } { d t } = - \frac { \nabla p } { \rho } + \vec { f }
+\frac { \partial \vec { v } } { \partial t } + ( \vec { \vec{v} } \nabla ) \vec { v } = - \frac { \nabla p } { \rho } + \vec { f }
+\end{align*}
+Здесь мы учли что в уравнение Ньютона входит полная производная. У нас  5 неизвестных – 3 компоненты скорости, давление и плотность. И только 4 уравнения: 3 уравнения Эйлера для трех компонент и уравнение непрерывности.
+Нужно еще одно уравнение – уравнение состояния, связывающее давление, плотность и энтропию $S$: $ P = P ( \rho , S ) $ и уравнение для энтропии. Для изоэнтропический жидкости $ \frac { d S } { d t } = \frac { \partial S } { \partial t } + \vec { v } \nabla S = 0 $
+
+Если в начальный момент времени энтропия была одинакова во всем пространстве, то она не будет меняться с течением времени и уравнение состояние принимает вид: $ P = P ( \rho ) $.
+В идеальном газе уравнение адиабаты имеет вид(\textbf{уравнение Пуассона}):
+\begin{align*}
+P &= P _ { 0 } \left( \rho / \rho _ { 0 } \right) ^ { \gamma } \\
+\gamma &= c _ { p } / c _ { v }
+\end{align*}
+где для идеального газа $\gamma = \frac{i+2}{i}$, ($i$ - количество степеней свободы).
+Для жидкостей дело хуже. В разных диапазонах давления имеют разные уравнения состояния. Эмпирическая формула для давления $P$, измеряемого в атмосферах: 
+\begin{align*}
+\frac { P + B } { 1 + B } = \left( \frac { \rho } { \rho _ { 0 } } \right) ^ { \gamma }
+\end{align*}
+где $B=3000\text{ атм}$, $\gamma = 7$, давление до $10^5$ атмосфер.
+
+Итак, \textbf{система уравнений для идеальной жидкости} принимает вид:
+\begin{align*}
+& \frac { \partial \vec { v } } { \partial t } + ( \vec { v } \nabla ) \vec { v } = - \frac { \nabla p } { \rho } + \vec { g } \\
+& \frac { \partial \rho } { \partial t } + d i v ( \rho \vec { v } ) = 0 \\
+& P = P ( \rho )
+\end{align*}
+\subsection{Законы сохранения энергии и импульса для идеальной жидкости}
+
+Энергия единицы объема – кинетическая $+$ внутренняя
+\begin{align*}
+E = \frac { 1 } { 2 } \rho v ^ { 2 } + \rho \varepsilon
+\end{align*}
+
+Закон сохранения энергии в интегральной форме:
+\begin{align*}
+\frac { \partial } { \partial t } \int\limits_{ V } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + \varepsilon \right) d V = - \oint\limits_{ S } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + \varepsilon \right) \vec { v } d \vec { \sigma } - \oint _ { S } p \vec { v } d \vec { \sigma }
+\end{align*}
+
+Изменение энергии в объеме равно притоку (выносу) энергии в объем через границы $+$ работа внешних сил давления. Энтальпия равна $ W = \rho \varepsilon + P $ из курса термодинамики и общей физики. Получаем закон сохранения в интегральной форме:
+\begin{align*}
+\frac { \partial } { \partial t } \int \limits_{ V } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + \varepsilon \right) d V = - \oint \limits_{ S } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + W \right) \vec { v } d \vec { \sigma }
+\end{align*}
+По формуле Стокса переходим в правой части от интегрирования по поверхности к интегрированию по объему:
+\begin{align*}
+\int \limits_ { V } \left[ \frac { \partial } { \partial t } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + \varepsilon \right) + \Div \left( \rho \left( \frac { 1 } { 2 } v ^ { 2 } + W \right) \vec { v } \right] d V = 0\right.
+\end{align*}
+
+Поскольку объем произвольный можно перейти к дифференциальной  форме закона сохранения энергии:
+\begin{align*}
+& \frac { \partial E } { \partial t } + \Div \vec { N } = 0 \\
+& E = \frac { \rho v ^ { 2 } } { 2 } + \rho \varepsilon \\
+& \vec { N } = \left[ \frac { \rho v ^ { 2 } } { 2 } + \rho \varepsilon + P \right] \vec { v }
+\end{align*}
+Здесь $E$ – плотность энергии, $N$ – вектор плотности потока энергии – аналог вектора Пойнтинга в электродинамике. Введён в 1874 году Умовым.
+
+\subsection{Закон сохранения импульса}
+Для единицы объема жидкости импульс равен $ \vec { p } = \rho \vec { v } $. Если закон сохранения энергии мы выводили в интегральной форме, то здесь мы будем стартовать с дифференциальных уравнений. Запишем изменения для i-ой компоненты:
+\begin{align*}
+\frac { \partial } { \partial t } \left( \rho v _ { i } \right) = \rho \frac { \partial v _ { i } } { \partial t } + v _ { i } \frac { \partial \rho } { \partial t }
+\end{align*}
+
+Запишем уравнение Эйлера и уравнение непрерывности по компонентам:
+\begin{align*}
+\frac { \partial v _ { i } } { \partial t } + \sum _ { k = 1 } ^ { 3 } v _ { k } \frac { \partial v _ { i } } { \partial t } &= - \frac { 1 } { \rho } \frac { \partial P } { \partial x _ { i } } + f _ { i } \\
+\frac { \partial \rho } { \partial t } + \sum _ { k = 1 } ^ { 3 } \frac { \partial \left( \rho v _ { k } \right) } { \partial x _ { k } } &= 0
+\end{align*}
+В результате для изменения компоненты импульса имеем:
+\begin{align*}
+\frac { \partial } { \partial t } \left( \rho v _ { i } \right) = - \frac { \partial } { \partial x _ { k } } \left( P \delta _ { i k } + \rho v _ { i } v _ { k } \right) + \rho f _ { i }
+\end{align*}
+Здесь по индексу $k$ идет суммирование. Хочетсяя привести это уравнение к дивергентной форме, чтобы получить закон сохранения. Учтем:
+\begin{align*}
+\rho v _ { k } \frac { \partial v _ { i } } { \partial x _ { k } } + v _ { i } \frac { \partial \left( \rho v _ { k } \right) } { \partial x _ { k } } = \frac { \partial \left( \rho v _ { i } v _ { k } \right) } { \partial x _ { k } }
+\end{align*}
+Внешние силы приводят к иземенеию импульса. Нужно что-то придумать с давлением:
+\begin{align*}
+\frac { \partial P } { \partial x _ { i } } = \frac { \partial \left( \delta _ { i k } p \right) } { \partial x _ { k } }
+\end{align*}
+Здесь $ \delta _ { i k } = 1 , i = k ; \delta _ { i k } = 0 , i \neq k $ - символ Кронекера.
+
+В результате получим:
+\begin{align*}
+\frac { \partial } { \partial t } \left( \rho v _ { i } \right) = - \frac { \partial } { \partial x _ { k } } \left( P \delta _ { i k } + \rho v _ { i } v _ { k } \right) + \rho f _ { i }
+\end{align*}
+
+Введем тензор плотности потока импульса: $ \Pi _ { i k } = P \delta _ { i k } + \rho v _ { i } v _ { k } $. Тогда закон сохранения импульса запишется как:
+\begin{align*}
+\frac { \partial } { \partial t } \left( \rho v _ { i } \right) = - \frac { \partial \Pi _ { i k } } { \partial x _ { k } } + \rho f _ { i }
+\end{align*}
+
+Проинтегрируем последнее равенство по объему:
+\begin{align*}
+\frac { \partial } { \partial t } \int \limits_{ V } \rho v _ { i } d V = - \int \limits_{ V } \frac { \partial \Pi _ { i k } } { \partial x _ { k } } d V + \int \limits_{ V } \rho f _ { i } d V
+\end{align*}
+Используя теорему Остроградского-Гаусса для тензора получаем:
+\begin{align*}
+\frac { \partial } { \partial t } \int \limits_ { V } \rho v _ { i } d V = - \oint \limits_ { S } \Pi _ { i k } n _ { k } d \sigma + \int \limits_ { V } \rho f _ { i } d V
+\end{align*}
+Таким образом, изменение импульса в объеме $V$ связано с потоком импульса через поверхность $S$. Векторная же форма закона сохранения импульса имеем вид:
+\begin{align*}
+\frac { \partial } { \partial t } \int \limits_ { V } \rho  \vec{v} d V  = - \oint \limits_ { S } [ P \vec { n } + \rho \vec { v } ( \vec { v } \vec{n} ) ]d \sigma
+\end{align*}
+Здесь $\vec{n}$ - внешняя нормаль.
+
+Следствие: Как использовать закон сохранения импульса для нахождения силы действия потока на тело? Если движение стационарно:
+\begin{align*}
+\oint _ { S } \left[ p n _ { i } + \rho v _ { i } v _ { k } n _ { k } \right] d \sigma = 0
+\end{align*}
+Отсюда для силы действия потока на тело имеем:
+\begin{align*}
+F _ { i } = - \oint \limits_ { S } p n _ { i } d \sigma = \oint \limits_ { S } \rho v _ { i } v _ { k } n _ { k } d \sigma
+\end{align*}
+
+Пример - изогнутая трубка(душ).
+\begin{align*}
+\frac { \partial } { \partial t } \int \limits_ { V } \rho  \vec{v} d V  = - \oint \limits_ { S } [ P \vec { n } + \rho \vec { v } ( \vec { v } \vec{n} ) ]d \sigma
+\end{align*}
+\begin{figure}[h]
+	\centering
+	\includegraphics[]{example-image-a}
+	\caption{картинка изогнутой трубки}
+	\label{fig:figure5}
+\end{figure}
+В одно сечение жидкость втекает, а из другого вытекает.
+\subsection{Гидростатика}
+Рассмотрим простейший случай когда скорость жидкости равна нулю. Из исходной системы уравнений 
+\begin{align*}
+& \frac { \partial \vec { v } } { \partial t } + ( \vec { v } \nabla ) \vec { v } = - \frac { \nabla p } { \rho } + \vec { f } \\
+& \frac { \partial \rho } { \partial t } + d i v ( \rho \vec { v } ) = 0 \\
+& P = P ( \rho )
+\end{align*}
+следует
+\begin{align*}
+& \nabla P = \rho \vec { f } \\
+& P = P ( \rho )
+\end{align*}
+
+Пусть внешняя сила потенциальна
+\begin{align*}
+& \vec { f } = - \nabla u \\
+& \nabla P = - \rho \nabla u
+\end{align*}
+то есть градиенты давления и сила параллельны.
+
+При какой зависимости плотности от координаты последнее уравнение имеет решение? Применим к последнему уравнению операцию ротора
+\begin{align*}
+& \operatorname { rot } ( \nabla P ) = 0 \\
+& \operatorname { rot } ( - \rho \nabla u ) = - \rho \operatorname { rot } ( \nabla P ) - [ \nabla P \nabla \rho ] \\ 
+& [ \nabla P \nabla \rho ] = 0
+\end{align*}
+Таким образом вектора градиентов плотности и потенциала должны быть параллельны.
+
+\emph{Распределение давления в поле тяжести.}
+\begin{align*}
+& \nabla P = \rho \vec { g } \\
+& P = P ( \rho )
+\end{align*}
+то есть в поле тяжести стационарное решение существует, если плотность зависит от высоты.
+
+\textbf{Примеры:}
+\begin{enumerate}
+	\item {\textbf{Жидкость в поле тяжести}(вода). Плотность постоянна. Ось $z$ направлена вниз.
+	\begin{align*}
+	& \frac { d P } { d z } = \rho _ { 0 } g \\
+	& P = P _ { A } + \rho _ { 0 } g z
+	\end{align*}
+	Давление увеличивается на 1 атмосферу на 10 метрах.}
+	\item {\textbf{Изотермическая атмосфера}(идеальный газ с постоянной температурой $T$). Ускорение можно считать постоянным. Ось $z$ направлена вверх.
+	\begin{align*}
+	& \frac { d P } { d z } = - \rho ( z ) g \\
+	& P = \frac { R } { \mu } \frac { m } { V } T \\
+	& P = \frac { R } { \mu } \rho T
+	\end{align*}
+	Здесь $R$ - универсальная газовая постоянная. $\mu$ - молярная масса газа.
+	\begin{align*}
+	& \frac { R T } { \mu } \frac { d P } { d z } = - \rho ( z ) g \\
+	& \rho = \rho _ { 0 } \exp ( - z / h ) , P = P _ { 0 } \exp ( - z / h ) \\
+	& h = \frac { R T } { \mu g }
+	\end{align*}
+	Здесь $h$ - высота атмосферы, величина порядка 8 км, поэтому изменением силы тяжести можно пренебречь.}
+	\item {\textbf{Закон Архимеда}. На тело, погруженное в жидкость,  со стороны жидкости действует выталкивающая сила, равная весу жидкости, вытесненную этим телом.
+	\begin{align*}
+	\nabla P = \rho \vec { g }
+	\end{align*}
+	Сила со стороны жидкости на элемент поверхности $ d \vec { F } = - p \vec { n } d S $. Здесь $\vec{n}$ - внешняя нормаль. Тогда сила Архимеда равна:
+	\begin{align*}
+	& \vec { F }_ { A }  = - \oint \limits_ { S } P \vec{n} d S = - \int \limits_ { V } \nabla P d V = - \int \limits_ { V } \rho \vec { g } d V \\
+	& \int _ { V } \rho \vec { g } d V = \vec { P } \approx \rho V \vec { g } \\
+	& & \vec { F }_ { A } = - \vec { P }
+	\end{align*}
+	Здесь $\vec{P}$ - вес вытесненнной жидкости. Причем и плотность, и ускорение \textbf{не обязательно постоянны!}
+	}
+\end{enumerate}
+\subsection{Условие гидростатического равновесия. Частота Брента-Вайсаля}
+Выясним условия, при  которых состояние равновесия жидкости в поле тяжести будет устойчивым.
+Будем считать что плотность зависит от глубины. Ось $z$ направлена вниз. Элементарный  объем   находится на глубине $z$, потом $z+x$.
+
+На тело действуют две силы: сила тяжести и сила Архимеда, и в равновесии они равны  по величине:
+\begin{align*}
+F _ { g } ( z ) &= g \rho ( z ) V _ { 0 } \\
+F _ { A } ( z ) &= - F _ { g } ( z ) = - g \rho ( z ) V _ { 0 }
+\end{align*}
+
+Пусть данный объем смещается по вертикали на расстояние $x$. Масса сохраняется и сила тяжести не меняется.  Пусть \textbf{жидкость несжимаема}, тогда объем не меняется. А сила Архимеда изменяется, так как плотность вокруг частицы изменилась. Тогда уравнение  Ньютона для объема запишется как:
+\begin{align*}
+& m \frac { d ^ { 2 } x } { d x ^ { 2 } } = g \rho ( z ) V _ { 0 } - g \rho ( z + x ) V _ { 0 } \\
+& m = \rho ( z ) V _ { 0 }
+\end{align*}
+
+Разлагая плотность в ряд, и ограничиваясь линейными членами, получаем:
+\begin{align*}
+\frac { d ^ { 2 } x } { d t ^ { 2 } } = - \frac { g } { \rho } \frac { d \rho } { d z } x
+\end{align*}
+Это уравнение гармонического осциллятора:
+\begin{align*}
+& \frac { d ^ { 2 } x } { d t ^ { 2 } } + N ^ { 2 } x = 0 \\
+& N ^ { 2 } = \frac { g } { \rho } \frac { d \rho } { d z } \propto \frac { g } { L }
+\end{align*}
+Здесь $ N = \left( \frac { g } { \rho } \frac { d \rho } { d z } \right) ^ { 1 / 2 } $ - частота Брента-Вяйсаля.
+\begin{enumerate}
+	\item {\textbf{Устойчивость жидкости} наблюдается при $ N ^ { 2 } > 0 , \frac { d \rho } { d z } > 0$. Элемент совершает колебания с частотой $N$.}
+	\item {\textbf{Неустойчивость жидкости} наблюдается при $ N ^ { 2 } < 0 $. Элемент падает вниз или стремится всплыть.}
+\end{enumerate}
+\subsection{Уравнение Бернулли}
+Получим альтернативную запись уравнения Эйлера в форме Громэка-Лэмба
+\begin{align*}
+&\frac { \partial \vec { v } } { \partial t } + ( \vec { v } \nabla ) \vec { v } = - \frac { \nabla P } { \rho } + \vec { g } \\
+&\vec { g } = g \nabla z
+\end{align*}
+Ось $z$ направлена вниз. Учтем два равенства из курсов векторного анализа и термодинамики(для равновестных обратимых изобарических процессов).
+\begin{align*}
+&(\vec {v} \nabla ) \vec { v } = \frac { 1 } { 2 } g r a d \left( v ^ { 2 } \right) - [ \vec { v } , [\nabla , \vec { v } ]] \\
+&\frac { \nabla P } { \rho } = \nabla W \\
+&\frac { \nabla P } { \rho } = \nabla \frac { P } { \rho } , \quad \rho = const
+\end{align*}
+
+Получаем уравнение Эйлера в форме Громэко-Лэмба
+\begin{align*}
+\frac { \partial \vec { v } } { \partial t } + \operatorname { grad } \left( \frac { v ^ { 2 } } { 2 } + W - g z \right) = [ \vec { v } , [\nabla , \vec { v } ]]
+\end{align*}
+
+Рассмотрим частные случаи:
+\begin{enumerate}
+	\item {\textbf{Движение стационарно} ($\vec{v}=const$)}
+	\begin{itemize}
+		\item {\textbf{Безвихревое движение}(потенциальное, $\operatorname { rot } \vec{v}=0$).
+		Тогда из уравнения Громэко-Лэмба имеем
+		\begin{align*}
+		& \operatorname { grad } \left( \frac { v ^ { 2 } } { 2 } + W - g z \right) = 0 \\
+		& \frac { v ^ { 2 } } { 2 } + W - g z = const
+		\end{align*}
+		\textbf{Константа сохраняется во всем пространстве.} Если жидкость несжимаема и однородна, то:
+		\begin{align*}
+		\frac { v ^ { 2 } } { 2 } + \frac { P } { \rho } - g z = const
+		\end{align*}
+		Это уравнение Бернулли для стационарного \textbf{потенциального} движения однородной несжимаемой жидкости.
+		}
+		\item {\textbf{Вихревое движение}($\operatorname { rot } \vec{v} \neq 0$)
+
+		Введем понятие линии тока. \textbf{Линия тока} - это линия, касательные к которой в данный момент времени и в каждой точке совпадают с вектором скорости $v$.  Линии тока определяются системой дифференциальных уравнений.
+		\begin{figure}[h]
+			\centering
+			\includegraphics[scale=1]{example-image-c}
+			\caption{Линии тока}
+			\label{fig:figure6}
+		\end{figure}
+		\begin{align*}
+		\frac { d x } { d v _ { x } } = \frac { d y } { d v _ { y } } = \frac { d z } { d v _ { z } }
+		\end{align*}
+		Умножим уравнение Эйлера на вектор скорости, то есть спроектируем на линии тока:
+		\begin{align*}
+		& \vec {v}[ \vec { v } , [\nabla , \vec { v } ]]=0 \\
+		& \vec {v} \perp [ \vec { v } , [\nabla , \vec { v } ]]
+		\end{align*}
+		Используя определение линии тока
+		\begin{align*}
+		\vec { v } \nabla ( \ldots ) = \frac { d } { d l } ( \ldots ) = 0
+		\end{align*}
+		получаем тот же закон сохранения
+		\begin{align*}
+		\frac { v ^ { 2 } } { 2 } + \frac { p } { \rho } - g z = const
+		\end{align*}
+		Но здесь константа сохраняется только вдоль линии тока, и \textbf{для разных линий тока константы разные!}
+		}
+		\end{itemize}
+	\item {\textbf{Нестационарное вихревое движение}}
+\end{enumerate}
