@@ -131,7 +131,7 @@ F _ { i } = - \oint \limits_ { S } p n _ { i } d \sigma = \oint \limits_ { S } \
 \begin{align*}
 \frac { \partial } { \partial t } \int \limits_ { V } \rho  \vec{v} d V  = - \oint \limits_ { S } [ P \vec { n } + \rho \vec { v } ( \vec { v } \vec{n} ) ]d \sigma
 \end{align*}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[]{example-image-a}
 	\caption{картинка изогнутой трубки}
@@ -274,7 +274,7 @@ F _ { A } ( z ) &= - F _ { g } ( z ) = - g \rho ( z ) V _ { 0 }
 		\item {\textbf{Вихревое движение}($\operatorname { rot } \vec{v} \neq 0$)
 
 		Введем понятие линии тока. \textbf{Линия тока} - это линия, касательные к которой в данный момент времени и в каждой точке совпадают с вектором скорости $v$.  Линии тока определяются системой дифференциальных уравнений.
-		\begin{figure}[h]
+		\begin{figure}[H]
 			\centering
 			\includegraphics[scale=1]{example-image-c}
 			\caption{Линии тока}
@@ -299,5 +299,91 @@ F _ { A } ( z ) &= - F _ { g } ( z ) = - g \rho ( z ) V _ { 0 }
 		Но здесь константа сохраняется только вдоль линии тока, и \textbf{для разных линий тока константы разные!}
 		}
 		\end{itemize}
-	\item {\textbf{Нестационарное вихревое движение}}
+	\item {\textbf{Нестационарное вихревое движение}
+	\begin{align*}
+	& \frac { \partial \vec { v } } { \partial t } \neq 0 \\
+	& \operatorname { rot } v = 0
+	\end{align*}
+
+	В силу потенциальности $ \vec { v } = \nabla \varphi $ из уравнения Громэко-Лэмба получаем
+	\begin{align*}
+	\frac { \partial \phi } { \partial t } + \frac { v ^ { 2 } } { 2 } + \frac { p } { \rho } - g z = \mathrm { const }
+	\end{align*}
+	Этот интеграл носит название \textbf{интеграла Коши.}
+
+	Лучевая трубка тока, трубка образованная множеством линий тока, проходящей через некоторый замкнутый контур.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{example-image-c}
+		\caption{Лучевая трубка}
+		\label{fig:figure7}
+	\end{figure}
+
+	Закон Бернулли это ничто иное как следствие законов сохранения  массы и энергии вдоль некоторой лучевой трубки через 2 сечения входящее $S_1$ и выходящее $S_2$.
+
+	Закон сохранения массы: \textbf{сколько втекает, столько и вытекает.}
+	\begin{align*}
+	m _ { i } = \rho _ { i } S _ { i } v _ { i } \Delta t , \quad i = 1,2
+	\end{align*}
+	Изменение энергии за счет вытекания и работы силы тяжести равно работе внешних сил:
+	\begin{align*}
+	& A _ { i } = p _ { i } S _ { i } v _ { i } \Delta t \\
+	& E _ { i } = \frac { v _ { i } ^ { 2 } } { 2 } + u _ { i } + \varepsilon _ { i } \\
+	& A _ { 1 } - A _ { 2 } = \Delta m \left( E _ { 2 } - E _ { 1 } \right)
+	\end{align*}
+	Здесь $u$ и $\varepsilon$ - потенциальная и внутренняя энергия. Рассмотрим случай несжимаемой жидкости. В этом случае внутренняя энергия не меняется, а $ u = - g z $. В результате получим уравнение Бернулли.
+
+	}
+\end{enumerate}
+
+Уравнение Бернулли имеет множество приложений:
+\begin{enumerate}
+	\item {Трубка Пито
+	Знаем сечения, измеряем давления – находим скорости
+	\begin{align*}
+	& \frac { v _ { 1 } ^ { 2 } } { 2 } + \frac { p _ { 1 } } { \rho } = \frac { v _ { 2 } ^ { 2 } } { 2 } + \frac { p _ { 2 } } { \rho } \\
+	& S _ { 1 } v _ { 1 } = S _ { 2 } v _ { 2 }
+	\end{align*}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{example-image-c}
+		\caption{Трубка Пито}
+		\label{fig:figure8}
+	\end{figure}
+	}
+	\item {Обтекание двух цилиндров
+	Сближение линий тока, увеличение скорости. Возникает притяжение цилиндров.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{example-image-c}
+		\caption{схематический вид цилиндров}
+		\label{fig:figure9}
+	\end{figure}
+	}
+	\item {Вытекание жидкости из сосуда
+	\begin{align*}
+	& \sigma < < S \\
+	& v = \sqrt { 2 g \left( z _ { 1 } - z _ { 2 } \right) }
+	\end{align*}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{example-image-c}
+		\caption{Схематичный вид вытекающей жидкости}
+		\label{fig:figure10}
+	\end{figure}
+	}
+	\item {Задача Прандля. Косое падение плоской струи на поверхность. Кумулятивные снаряды. Наряду с уравнением Бернулли нужно использовать закон сохранения импульса.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{example-image-c}
+		\caption{Наклонное падение струи}
+		\label{fig:figure11}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{example-image-c}
+		\caption{Кумулятивные снаряды}
+		\label{fig:figure12}
+	\end{figure}
+	}
 \end{enumerate}
