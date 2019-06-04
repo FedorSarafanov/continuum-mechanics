@@ -207,7 +207,7 @@
 \end{align*}
 \begin{align*}
 a_{i} &=\lim _{\Delta t \rightarrow 0} \frac{v_{i}\left(x_{k}+\Delta x_{k}, t+\Delta t\right)-v_{i}\left(x_{k}, t\right)}{\Delta t} = \\
-&=\lim _{\Delta t \rightarrow 0}\frac{\left[v_{i}\left(x_{k}, t\right)+\frac{\partial v_{i}}{\partial x_{k}} \Delta x_{k}+\frac{\partial v_{i}}{\partial t}-v_{i}\left(x_{k}, t\right)\right]}{\Delta t} =\frac{\partial v_{i}}{\partial x_{k}} v_{k}+\frac{\partial v_{i}}{\partial t} \\
+&=\lim _{\Delta t \rightarrow 0}\frac{\left[v_{i}\left(x_{k}, t\right)+\frac{\partial v_{i}}{\partial x_{k}} \Delta x_{k}+\frac{\partial v_{i}}{\partial t}\Delta t-v_{i}\left(x_{k}, t\right)\right]}{\Delta t} =\frac{\partial v_{i}}{\partial x_{k}} v_{k}+\frac{\partial v_{i}}{\partial t} \\
 \end{align*}
 Таким образом 
 \begin{align*} 
@@ -215,14 +215,17 @@ a_{i} &=\frac{\partial v_{i}}{\partial t}+v_{k} \frac{\partial v_{i}}{\partial t
 \end{align*}
 Или в векторной форме
 \begin{equation}
-	\vec{a} &=\frac{\partial \vec{v}}{\partial t}+(\vec{v}\,\nabla) \vec{v}=\left(\pdv{t}+(\vec{v}\,\nabla)\right) \vec{v}
+	\vec{a} =\frac{\partial \vec{v}}{\partial t}+(\vec{v}\,\nabla) \vec{v}=\left(\pdv{t}+(\vec{v}\,\nabla)\right) \vec{v}
 \end{equation}
 
-Аналогично находятся и производные от любой другой величины. Эта производная носит название субстанциональной производной:
+Аналогично находятся и производные от любой другой величины. Эта производная носит название \textit{субстанциональной производной}:
+\index{Производная!субстанциональная}
+\index{Производная!локальная}
 \begin{align*} 
 \dv{t}=\pdv{t}+(\vec{v}\,\nabla)
 \end{align*}
 
+Первое слагаемое здесь -- \textit{локальная производная}.
 
 
 \subsection{Связь Лагранжева и Эйлерова описаний}
