@@ -211,7 +211,7 @@ a_{i} &=\lim _{\Delta t \rightarrow 0} \frac{v_{i}\left(x_{k}+\Delta x_{k}, t+\D
 \end{align*}
 Таким образом 
 \begin{align*} 
-a_{i} &=\frac{\partial v_{i}}{\partial t}+v_{k} \frac{\partial v_{i}}{\partial t}=\left(\frac{\partial}{\partial t}+v_{k} \frac{\partial}{\partial t}\right) v_{i} \\
+a_{i} &=\frac{\partial v_{i}}{\partial t}+v_{k} \frac{\partial v_{i}}{\partial x_{k}}=\left(\frac{\partial}{\partial t}+v_{k} \frac{\partial}{\partial x_{k}}\right) v_{i} \\
 \vec{a} &=\frac{\partial \vec{v}}{\partial t}+(\vec{v}\,\nabla) \vec{v}=\left(\frac{\partial}{\partial t}+(\vec{v}\,\nabla)\right) \vec{v}
 \end{align*}
 
@@ -309,7 +309,7 @@ $F_s$ - сила действующая на элемент объема со с
 
 В результате получаем \textbf{уравнение Эйлера}
 \begin{align*}
-\frac { d \vec { v } } { d t } = - \frac { \nabla p } { \rho } + \vec { f }\,
+\frac { d \vec { v } } { d t } = - \frac { \nabla p } { \rho } + \vec { f } \Rightarrow
 \frac { \partial \vec { v } } { \partial t } + ( \vec{v}\,\nabla ) \vec { v } = - \frac { \nabla p } { \rho } + \vec { f }
 \end{align*}
 Здесь мы учли что в уравнение Ньютона входит полная производная. У нас  5 неизвестных – 3 компоненты скорости, давление и плотность. И только 4 уравнения: 3 уравнения Эйлера для трех компонент и уравнение непрерывности.
@@ -349,7 +349,8 @@ E = \frac { 1 } { 2 } \rho v ^ { 2 } + \rho \varepsilon
 \pdv{t} \int\limits_{ V } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + \varepsilon \right)\dd{V} = - \oint\limits_{ S } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + \varepsilon \right) \vec { v } \dd{\vec{\sigma}} - \oint \limits_ { S } p \vec { v } \dd{\vec{\sigma}}
 \end{align*}
 
-Изменение энергии в объеме равно притоку (выносу) энергии в объем через границы $+$ работа внешних сил давления. Энтальпия равна $ W = \rho \varepsilon + P $ из курса термодинамики и общей физики. Получаем закон сохранения в интегральной форме:
+Изменение энергии в объеме равно притоку (выносу) энергии в объем через границы $+$ работа внешних сил давления. Энтальпия равна $ \displaystyle W = \varepsilon + \frac{P}{\rho} $ из курса термодинамики и общей физики. Получаем закон сохранения в интегральной форме:
+%видимо энтальпия приходящаяся на единицу массы
 \begin{align*}
 \pdv{t} \int \limits_{ V } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + \varepsilon \right)\dd{V} = - \oint \limits_{ S } \rho \left( \frac { 1 } { 2 } v ^ { 2 } + W \right) \vec { v } \dd{\vec{\sigma}}
 \end{align*}
@@ -363,7 +364,7 @@ E = \frac { 1 } { 2 } \rho v ^ { 2 } + \rho \varepsilon
 		\rho \qty( 
 			\frac{1}{2} v^2 + W 
 			) 
-		) \vec{v} 
+		 \vec{v}) 
 \right] \dd{V} = 0
 \end{align*}
 
@@ -421,7 +422,7 @@ E = \frac { 1 } { 2 } \rho v ^ { 2 } + \rho \varepsilon
 \end{align*}
 Таким образом, изменение импульса в объеме $V$ связано с потоком импульса через поверхность $S$. Векторная же форма закона сохранения импульса имеем вид:
 \begin{align*}
-\pdv{t} \int \limits_ { V } \rho  \vec{v}\dd{V}  = - \oint \limits_ { S } [ P \vec { n } + \rho \vec { v } ( \vec { v } \vec{n} ) ]d \sigma
+\pdv{t} \int \limits_ { V } \rho  \vec{v}\dd{V}  = - \oint \limits_ { S } [ P \vec { n } + \rho \vec { v } ( \vec { v } \vec{n} ) ]d \sigma + \int \limits_{ V } \vec{ f } \dd{V}
 \end{align*}
 Здесь $\vec{n}$ - внешняя нормаль.
 
@@ -467,7 +468,7 @@ F _ { i } = - \oint \limits_ { S } p n _ { i } d \sigma = \oint \limits_ { S } \
 При какой зависимости плотности от координаты последнее уравнение имеет решение? Применим к последнему уравнению операцию ротора
 \begin{align*}
 & \operatorname { rot } ( \nabla P ) = 0 \\
-& \operatorname { rot } ( - \rho \nabla u ) = - \rho \operatorname { rot } ( \nabla P ) - [ \nabla P \nabla \rho ] \\ 
+& \operatorname { rot } ( - \rho \nabla u ) = - \rho \operatorname { rot } ( \nabla u ) - [ \nabla u \nabla \rho ] \\ 
 & [ \nabla P \nabla \rho ] = 0
 \end{align*}
 Таким образом вектора градиентов плотности и потенциала должны быть параллельны.
@@ -497,7 +498,7 @@ F _ { i } = - \oint \limits_ { S } p n _ { i } d \sigma = \oint \limits_ { S } \
 	\end{align*}
 	Здесь $R$ - универсальная газовая постоянная. $\mu$ - молярная масса газа.
 	\begin{align*}
-	& \frac { R T } { \mu } \frac { d P } { d z } = - \rho ( z ) g \\
+	& \frac { R T } { \mu } \frac { d \rho } { d z } = - \rho ( z ) g \\
 	& \rho = \rho _ { 0 } \exp ( - z / h ) , P = P _ { 0 } \exp ( - z / h ) \\
 	& h = \frac { R T } { \mu g }
 	\end{align*}
@@ -618,11 +619,11 @@ F _ { A } ( z ) &= - F _ { g } ( z ) = - g \rho ( z ) V _ { 0 }
 \end{align*}
 Но здесь константа сохраняется только вдоль линии тока, и \textit{для разных линий тока константы разные!}
 
-\subsubsection{Случай нестационарного вихревого движения}
-\index{Движение!нестационарное вихревое}
+\subsubsection{Случай нестационарного безвихревого движения}
+\index{Движение!нестационарное безвихревое}
 \begin{align*}
 & \frac { \partial \vec { v } } { \partial t } \neq 0 \\
-& \operatorname { rot } v = 0
+& \operatorname { rot } \vec v = 0
 \end{align*}
 
 В силу потенциальности $ \vec { v } = \nabla \varphi $ из уравнения Громэко-Лэмба получаем
@@ -735,7 +736,7 @@ m _ { i } = \rho _ { i } S _ { i } v _ { i } \Delta t , \quad i = 1,2
 
 Используем определение скорости и уравнение Эйлера
 \begin{align*}
-\frac { \vec { d v } } { d t } = - \frac { \nabla p } { \rho } - \vec { f }
+\frac { d\vec {v} } { d t } = - \frac { \nabla p } { \rho } - \vec { f }
 \end{align*}
 
 Пусть внешняя сила потенциальна, а процесс адиабатический
@@ -743,7 +744,7 @@ m _ { i } = \rho _ { i } S _ { i } v _ { i } \Delta t , \quad i = 1,2
 &{ \vec { f } = - \nabla u } \\ 
 &{ \frac { \nabla p } { \rho } = \nabla W }
 \end{align*}
-Здесь $W$ энтальпия.  Учтем, что $ ( \nabla \phi \dd{\vec{r}} ) = d \phi $ и окончательно получим
+Здесь $W$ энтальпия.  Учтем, что $ ( \nabla u \dd{\vec{r}} ) = d u $ и окончательно получим
 \begin{align*}
 &\frac { d \Gamma } { d t } = \oint _ { l } d \left( \frac { v ^ { 2 } } { 2 } - W - u \right) = 0 \\
 & \Gamma = const
@@ -775,7 +776,7 @@ m _ { i } = \rho _ { i } S _ { i } v _ { i } \Delta t , \quad i = 1,2
 \paragraph{Следствие 4.} 
 	В однородной несжимаемой жидкости можно исключить из рассмотрения уравнений движения давление.  Запишем уравнение Эйлера в форме Громэко-Лэмба
 	\begin{align*}
-	\frac { \partial \vec { v } } { \partial t } + \nabla \left( \frac { v ^ { 2 } } { 2 } \right) - [ \vec { v } \operatorname{r o t} \vec { v } ] = \nabla ( W + u )
+	\frac { \partial \vec { v } } { \partial t } + \nabla \left( \frac { v ^ { 2 } } { 2 } \right) - [ \vec { v } \operatorname{r o t} \vec { v } ] = - \nabla ( W + u ) % вроде должен быть минус 
 	\end{align*}
 	Возьмем от него ротор и учтем, что ротор от градиента равен нулю ($ \operatorname { rot } \nabla \vec { v } = 0 $)
 	\begin{align*}
@@ -806,11 +807,11 @@ m _ { i } = \rho _ { i } S _ { i } v _ { i } \Delta t , \quad i = 1,2
 Возникает поверхность <<тангенциального>> разрыва. Скорость терпит разрыв непрерывности.
 
 
-При учете таких разрывных решений решение уравнений идеальной жидкости неоднозначно: наряду с непрерывным решением появляется бесконечнок множество разрывных решений. При этом разрывные решения не имеют физического смысла: так как тангенциальные разрывы \textbf{абсолютно неустойчивы}, в результате чего движение жидкости становится \textbf{турбулентным}.
+При учете таких разрывных решений решение уравнений идеальной жидкости неоднозначно: наряду с непрерывным решением появляется бесконечное множество разрывных решений. При этом разрывные решения не имеют физического смысла: так как тангенциальные разрывы \textbf{абсолютно неустойчивы}, в результате чего движение жидкости становится \textbf{турбулентным}.
 
 Реальное течение безусловно однозначно. Всякая жидкость обладает вязкостью. Малая вязкость практически не проявляется во всем пространстве, но она будет играть определяющую роль в пристеночной области (пограничный слой).
 
-Тем не менее, в ряде случаев это достаточно хорошее приближение.  Например, \textit{хорошо обтекаемые тела}: самолет автомобиль, корабль -- движение жидкости от потенциального отличатся только в области <<пограничного>> слоя и <<следа>> позади тела.
+Тем не менее, в ряде случаев это достаточно хорошее приближение.  Например, \textit{хорошо обтекаемые тела}: самолет, автомобиль, корабль -- движение жидкости от потенциального отличатся только в области <<пограничного>> слоя и <<следа>> позади тела.
 
 Кроме того, это приближение работает и в случае \textit{малых нестационарных колебаний}. Рассмотрим его подробнее.
 
@@ -1018,7 +1019,7 @@ p = - \left( \frac { v ^ { 2 } } { 2 } + u \right) + \operatorname { const }
 \end{figure}
 Давление симметрично относительно миделя (серединной плоскости) сферы. Найдём полную силу со стороны жидкости на сферу:
 \begin{equation}
-    \vec{F} = - \int_S p_s \vec{n} dd{S}
+    \vec{F} = - \int_S p_s \vec{n} \dd{S}
 \end{equation}
 Можно подставить сюда давление и посчитать силу в лоб. Но намного проще
  заметить, что давление - чётная функция угла $\theta$, а нормаль 
@@ -1075,7 +1076,7 @@ p = - \left( \frac { v ^ { 2 } } { 2 } + u \right) + \operatorname { const }
 \end{equation}
 \begin{equation}
 	F'(z)=\lim\limits_{\Delta y\to0}\frac{\alpha(x,y+\Delta y)+i\beta(x,y+\Delta y)-\alpha(x,y)-i\beta(x,y)}{i\Delta y}=
-		\pdv{\alpha}{y}-\pdv{\alpha}{y}
+		\pdv{\beta}{y}-i\pdv{\alpha}{y}
 \end{equation}
 Итак, отсюда условие аналитичности
 \begin{gather}
