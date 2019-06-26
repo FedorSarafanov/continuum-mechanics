@@ -1,0 +1,64 @@
+\documentclass[tikz]{standalone}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{quotes,angles,calc,decorations.markings}
+% GNUPL
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt]
+        \draw[densely dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[densely dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[fill=white] {#4} (b);
+    \end{scope}
+}
+\begin{document}
+\pagestyle{empty}
+
+
+\begin{tikzpicture}[
+    scale=1, 
+    arrowline/.style={black!60},
+    kos/.style={black},
+    tangent/.style={
+        decoration={
+            markings,% switch on markings
+            mark=
+                at position #1
+                with
+                {
+                    \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,0pt);
+                    \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (1,0pt);
+                    \coordinate (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,1);
+                }
+        },
+        postaction=decorate
+    },
+    use tangent/.style={
+        shift=(tangent point-#1),
+        x=(tangent unit vector-#1),
+        y=(tangent orthogonal unit vector-#1)
+    },
+    use tangent/.default=1
+    ]
+    \draw[arrowline] (0,0.4)  to [out=0,in=120] node[sloped,pos=0.5]{\tikz{\draw[->,arrowline](0,0) -- ++(0.1,0)}} (3,0.6);
+    \draw[tangent=0.6,tangent=0,arrowline] (0,0.8)  to [out=0,in=120] node[sloped,pos=0.5]{\tikz{\draw[->,arrowline](0,0) -- ++(0.1,0)}} (3,1.2);
+
+    \draw [use tangent=1,->,kos] (0,0) -- (0.75,0) node[right] {$\vec{v}$};
+    \draw [use tangent=2,->,kos] (0,0) -- (0.75,0) node[right] {$\vec{v}$};
+    \draw[tangent=0.79,arrowline] (0,0)  to [out=0,in=120] node[sloped,pos=0.5]{\tikz{\draw[->,arrowline](0,0) -- ++(0.1,0)}} (3,0);
+    \draw [use tangent,->,kos] (0,0) -- (0.75,0) node[right] {$\vec{v}$};
+
+\end{tikzpicture}
+
+
+\end{document}
