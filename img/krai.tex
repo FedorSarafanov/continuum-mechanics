@@ -1,0 +1,164 @@
+\documentclass[tikz,10pt]{standalone}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+% \usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{cmap,pgfplots,pgfplotstable}
+\usetikzlibrary{arrows,calc}
+\usetikzlibrary{intersections,patterns}
+\pgfplotsset{compat=newest}
+\usepackage[outline]{contour}
+\contourlength{1.5pt}
+% \newcommand{\hevi}[2]{(x<#1?0:1)*(x>#2?0:1)}
+
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt]
+        \draw[dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[] {\contour{white}{#4}} (b);
+    \end{scope}
+}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{intersections}
+
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\input{colors}
+\begin{document}
+\begin{tikzpicture}[scale=1.5]
+% \draw[red,name path = A] (0,0) rectangle (3,3);
+
+% \draw (2,5)--(2,-1);
+% \draw[fill = myblue!70!blue, draw = none,scale=1,name path =B, domain=0:3,smooth,variable=\x] plot ({\x},{sin(deg(2*pi*\x/2))/5+0.5}) -- (3,1) -- (0,1) -- cycle;
+
+% \draw[fill = myblue, draw = none,scale=1,name path =B, domain=0:3,smooth,variable=\x] plot ({\x},{sin(deg(2*pi*\x/2))/5+0.5}) -- (3,0) -- (0,0) -- cycle;
+
+% \draw[scale=1,blue!50!magenta,name path =B, domain=0:3,smooth,variable=\x] plot ({\x},{sin(deg(2*pi*\x/2))/5+0.5});
+
+% \draw[<->] (1.5,0) -- node[fill=blue!15] {$h(z)$} (1.5,{sin(deg(2*1.5*pi/2))/5+1.5});
+%\fillbetween[of=A and B];
+%\draw[fill] (2,2) circle [radius=0.1];
+% \begin{pgfonlayer}{bg}
+% \fill [orange!50,
+%           intersection segments={
+%             of=A and B,
+%             % sequence={L1--R1}
+%           }];
+% \end{pgfonlayer}
+
+% \foreach \x in {0,0.01,...,3}{
+%     \draw[fill=blue!10,draw=none] (\x,0) rectangle (\x+0.02,{sin(deg(2*pi*\x/2))/5+1.5});
+% }
+
+% \filldraw[myblue] (-0.1,0) rectangle (2,1.47);
+\draw[->] (-0.5,0) -- (1.5,0) node [right] {$v_x$};
+\draw[->] (0,-0.1) -- (0,1.7) node [above] {$z$};
+
+\draw[scale=1,domain=0:pi/2,samples=1000,variable=\x,blue] plot ({exp(-2.5*\x)*cos(\x*180/pi*10)},{\x});
+\draw[fill=blue] (1,0) circle (0.7pt);
+
+% \draw[thick] (1,0) ++ (-0.8,0)  -- ++ (1.6,0);
+% \draw[<->] (1,-0.1) ++ (-0.5,0)  -- ++ (1,0) node[below,pos=0.5] {$v_x=v_0\, e^{-i\omega t}$};
+
+% \draw[->] (0.35,0.35) -- (-.35,-.35) node [below] {$z$};
+
+% \draw[fill=black!10,opacity=1,yshift=0.0cm] 
+%     (-0.25,-0.25) ++ (0,0)  -- ++ (0.35,0.35) -- ++ (3,0) -- coordinate (b)  ++ (-0.35,-0.35) -- cycle;
+
+% \draw[fill=myblue!150, draw=none,opacity=0.7] 
+%     (-0.25,-0.25) -- ++(0,1) coordinate (a) -- ++ (0.35,0.35) -- ++ (3,0) -- ++ (0,-1) -- ++ (-0.35,-0.35) -- cycle;
+
+% \draw[densely dashed, black!70] (a) -- ++ (3,0) -- ++ (0,-1);
+% \draw[densely dashed, black!70] (a)  ++ (3,0) -- ++ (0.35,0.35);
+
+% \draw[fill=black!10,opacity=1,yshift=0.0cm] 
+%     (-0.25,-0.25) ++ (0.5,1)  -- ++ (0.35,0.35) -- ++ (2,0) -- coordinate (b)  ++ (-0.35,-0.35) -- cycle;
+
+% \draw[semithick, ->] (b) -- ++ (1,0) node[above] {$\vec{v}$};
+
+% \begin{scope}[xshift=1.3cm, yshift=-0.25cm]
+% \lineann[0]{90}{1}{$h$}
+% \end{scope}
+% \draw[-] (-0.1,0.5) node [left] {$z_0$} -- ++(0.2,0);
+
+
+% \foreach \y in {30,60}{
+% 	\draw[white] (\y:0) -- (\y:1) node[pos=1.35, scale=0.7,black] {$n=\pgfmathparse{int(\y/30)}\pgfmathresult$};
+% }
+
+% \foreach \y in {0}{
+% 	\draw[white] (\y:0) -- (\y:1) node[pos=1,right=0.5em, scale=0.7,black] {$n=\pgfmathparse{int(\y/30)}\pgfmathresult, n=N$};
+% }
+
+% \draw (0,0) circle (1);
+% \foreach \y in {0,30,...,330}{
+% 	\draw (\y:0.4) coordinate (u) -- (\y:1);% node[pos=1.5, scale=0.7] {$n=\pgfmathparse{int(\y/30)}\pgfmathresult$};
+% 	\draw[fill, magenta] (u) circle (1pt);
+% 	\draw[<->,rotate=\y,black!60] (0.7,-0.1) -- ++ (0,0.2);
+% }
+
+%     \xdef\r{1}
+%     \xdef\dr{0}
+%     \xdef\step{5}
+%     \foreach \i [evaluate=\i as \To using \r+\dr*rand,
+%                    remember=\To as \From (initially \r)] in {0,\step,...,355} {
+%         \draw[blue] (\i:\From) -- (\i-3:\From+0.08); 
+%         % \ifnum \i<355
+%            % \draw (\i:\From) to[out=90+\i,in=-90+\i+\step] (\i+\step:\To); 
+%         % \else 
+%            % \draw (\i:\From) to[out=90+\i,in=-90+\i+\step] (\i+\step:\r);
+%         % \fi  
+        
+%         % \pgfmathparse{int(mod(\i,10))}
+%         % \let\ress\pgfmathresult
+%         % \ifnum \ress=0
+%            % \draw[->,black!60] (\i:0) -- (\i:\From); 
+%         % \else 
+%            % \draw (\i:\From) to[out=90+\i,in=-90+\i+\step] (\i+\step:\r);
+%         % \fi  
+%     }
+
+% \draw[dashed, blue] (0,0.5) -- ++(0.5,0);
+% \draw[<-] (0.5,0.5) -- ++(0,-0.25);
+% \draw[<-] (0.5,0.7) -- ++(0,0.25) node[above] {$\xi$};
+
+% \begin{scope}[yshift=1cm,xshift=.5cm]
+% \lineann[0.5]{0}{2}{$\lambda$}
+	% \draw (0.55,0.3) node  {\contour{white}{$\rho_2$}};
+	% \draw (1.5,0.7) node  {\contour{white}{$\rho_1$}};
+
+% \draw[->,>=open triangle 60,
+%         draw=magenta,
+%         fill=magenta,] (-0.6,0.75) -- node[left] {$\vec{g}$} ++ (0,-0.5) ;
+% \end{scope}
+% 	\draw[scale=1, thick,domain=0.01:1.99,smooth,variable=\x,red] plot ({\x},{sin(deg(2*pi*\x/2))/2});
+% 	\draw[line width=1.5pt] (0,-0.7) -- (0,0.7);
+% 	\draw[draw=none,pattern=north east lines,pattern color=blue, preaction={fill=white}] (0,-0.7) rectangle (-0.1,0.7); 
+
+% 	\draw[line width=1.5pt] (2,-0.7) -- (2,0.7);
+% 	\draw[draw=none,pattern=north east lines,pattern color=blue, preaction={fill=white}] (2,-0.7) rectangle (2.1,0.7); 
+
+
+% \end{scope}
+% \draw (4,-1.5) node {б)};
+% \draw (0,-1.5) node {a)};
+
+\end{tikzpicture}	
+\end{document}

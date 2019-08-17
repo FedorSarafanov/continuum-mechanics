@@ -1,0 +1,181 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+% \usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb,physics}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{decorations.markings}
+\tikzset{->-/.style={decoration={
+  markings,
+  mark=at position #1 with {\arrow{stealth}}},postaction={decorate}}}
+  \tikzset{-<-/.style={decoration={
+  markings,
+  mark=at position #1 with {\arrow{<}}},postaction={decorate}}}
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%% НАСТРОЙКИ ГРАФИКА %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      height=5cm,
+      % width=10.5cm,
+      scale=2.3,
+      % grid=both,        % вКлючаем отоБражение сетКи на графиКе
+      %
+      xlabel={$\mathrm{Re}$},       % ПодПись оси X
+      ylabel={$C_d$},       % ПодПись оси Y
+      %
+      major grid style={
+        line width=0.5pt,   % толщина основных линий сетКи
+        % draw=black!50,    % цвет основных линий сетКи: 50% черного (80% Белого) 
+        % draw=none,
+      },
+      %
+      minor grid style={
+        line width=0.5pt,   % толщина Промежуточных линий сетКи
+        % draw=black!20,    % цвет Промежуточных линий сетКи
+        % draw=none,
+      },
+      %
+      % minor x tick num=0,   % Количество Промежуточных линий между основными
+      % minor y tick num=0,   % Количество Промежуточных линий между основными
+      %
+      ticklabel style={
+        scale=1      % уменьшим размер ПодПисей метоК на осях
+      },    
+      %
+      % ticks=none,
+        axis lines=left,    % выравнивание оси y:  middle (в нуле)|left|right
+        %
+      % ymin = 7,% маКсимумы и минимумы осей на графиКе
+      % ymax = 10,
+      % ymax = 0.28,
+      % ymin = 0,
+      % ymax= 1.5,
+        % x label style={
+        % at={(current axis.right of origin)}, 
+        %     xshift=1ex, anchor=center
+        % },
+      % enlargelimits=true,
+      ymin = 0, 
+      xmin=-0.001,
+      % ymax = 3.5,
+      % xmin=-3*pi/2*0.8,
+      % xmax=2*pi,
+      % xmin=-2*pi,
+      % xmax=7.5,
+      % ymin=-2.1,
+      % ymax=0.5,
+      % ymin=-2.25,
+       % clip=false,
+      restrict y to domain=0:200,
+      restrict x to domain=0:200,
+      unbounded coords=jump,
+      %
+      % xtick distance=1,   % расстояние между метКами По оси X
+      ytick distance=1/4,    % расстояние между метКами По оси Y
+        xticklabels={},
+        yticklabels={{},,,,,,1,,,,2,,,,3}, 
+        xtick=\empty,
+        % ytick=\empty,
+      % disabledatascaling,
+      % ymin={-11/16},
+      % extra y ticks={-9/16,-6/16},  % доПолнительные метКи на осях
+      extra x ticks={0,1,2,3,4,5,6,7,8,9},  % доПолнительные метКи на осях
+      extra x tick labels={ % можно уКазать сПециальные ПодПиси К ним
+        {$1\vphantom{10^0}$},
+        {$10^1$},
+        {$10^2$},
+        {$10^3$},
+        {$10^4$},
+        {$10^5$},
+        {$10^6$},
+        {$10^7$},
+          % {$\delta$},
+      %     {$\frac{\pi}{a}$}
+        },    
+      extra y ticks={0},  % доПолнительные метКи на осях
+      extra y tick labels={ % можно уКазать сПециальные ПодПиси К ним
+          {$\mathrm{0}$}
+        },    
+      extra y tick style={
+        % yshift=1em,
+        % black,
+        % fill=white
+      },
+      unit vector ratio = 0.8 1,% масштаБ 1:1 осей X и Y
+      % x={(1cm/1.3,0cm)}, y={(0cm,50cm/1.3)},
+      %
+      % x axis line style ={draw=none},
+      % x axis line style ={d},
+       % xmin=0,
+       % ymin=0,
+       % xmax=1,
+       ymax=3.5,
+      x axis line style ={->},
+      y axis line style ={->},
+        % y tick/.style={
+        %   draw=none,
+        %   % semithick,
+        % },
+      % x label style={
+      %   xshift=0.5em,
+      %   at={(axis description cs:1.05,0)},
+      %   anchor=center,    % расПоложение метКи ровно в точКе (1.1,0)
+      %   % rotate=360,     % вооБще метКу еще можно Повернуть)
+      %   % black       % цвет метКи
+      % },
+      %   y label style={
+      %     at={(axis cs:0.2,3.7)},
+      %     yshift=1em,
+      %     rotate=-90,
+      %     anchor=center,    % расПоложение метКи ровно в точКе (0,1.1)
+      %     black       % цвет метКи
+      %   },      
+      %             
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%s%%%%%%%%%%%%%%%%%%%%
+      % stressstrainset
+    ]
+
+    % Colored background
+    % \addplot graphics[xmin = 0, xmax = 2, ymin = 0, ymax = 1] {myplot.png};
+    % Contour lines
+    % \draw (axis cs:0,0) circle [blue, radius=1];
+        \addplot[smooth,blue,semithick] table[col sep=tab]{data/recd.tsv} node[pos=0.5] {};
+        % \addplot[mark=none,postaction={decorate}] table[col sep=comma] {myplot.csv};
+
+        \draw[densely dashed, gray] (1.3,0) -- (1.3,5);
+        \draw[densely dashed, gray] (2.16,0) -- (2.16,5);
+        \draw[densely dashed, gray] (5.18,0) -- (5.18,5);
+
+        \draw[draw=none] ({1.3/2},0) -- ({1.3/2},3) node[sloped,pos=0.25,scale=1,align=center]{Стационарный\\ $\pdv{v}{t}=0$};
+
+        \draw[draw=none] ({(1.3+2.16)/2},0) -- ({(1.3+2.16)/2},3) node[sloped,pos=0.25,scale=1,align=center]{Периодический\\ ламинарный};
+        \draw[draw=none] ({(5.18+2.16)/2},0) -- ({(5.18+2.16)/2},3) node[pos=0.17,scale=1,align=center]{Периодический\\ турбулентный};
+
+        % \addplot3[blue,
+        %     quiver={
+        %      u={-sin(pi*x/2*180/pi)*cos(pi*y*180/pi)},
+        %      v={-cos(pi*x/2*180/pi)*sin(pi*y*180/pi)},
+        %      scale arrows=0.1,
+        %     },
+        %     densely dashed,
+        %     -stealth,samples=15]
+        %         {0};
+
+                % \draw[fill=white, draw=none] (0.9,0.5) rectangle (1.1,0.6);
+    % \draw[dashed] (0.1,0.1) to[out=90-19, in=-90+19] (0.1,0.9);
+    % \draw[dashed] (0.3,0.1) to[out=90-32, in=-90+32] (0.3,0.9);
+
+    % \draw[dashed] (0.1,0.1) to[out=90-19, in=-90+19] (0.1,0.9);
+    % \draw[dashed] (0.3,0.1) to[out=90-32, in=-90+32] (0.3,0.9);      
+% \draw[dashed] (0.20,0.90) .. controls (0.50,0.75) and (0.50,0.25) .. (0.20,0.10);
+% \draw[dashed] (1.80,0.90) .. controls (1.55,0.75) and (1.55,0.25) .. (1.80,0.10);
+% \draw[dashed] (1.70,0.05) .. controls (1.20,0.25) and (0.80,0.25) .. (0.30,0.05);
+% \draw[dashed] (0.30,0.95) .. controls (0.80,0.75) and (1.20,0.75) .. (1.70,0.95);
+% \draw[dashed] (0.15,0.90) .. controls (0.30,0.69) and (0.30,0.31) .. (0.15,0.10);
+% \draw[dashed] (1.85,0.90) .. controls (1.70,0.69) and (1.70,0.31) .. (1.85,0.10);
+  \end{axis}
+\end{tikzpicture}
+\end{document}

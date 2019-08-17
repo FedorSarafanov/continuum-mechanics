@@ -1,0 +1,197 @@
+\documentclass[tikz,10pt]{standalone}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+% \usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{cmap,pgfplots,pgfplotstable}
+\usetikzlibrary{arrows,calc}
+\usetikzlibrary{intersections}
+\pgfplotsset{compat=newest}
+\usepackage[outline]{contour}
+\newcommand{\hevi}[2]{(x<#1?0:1)*(x>#2?0:1)}
+\input{colors}
+\begin{document}
+
+% \pgfplotstableread{data.tsv}\mytable
+
+	\begin{tikzpicture}
+		\begin{axis}[
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%% НАСТРОЙКИ ГРАФИКА %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			height=5cm,
+			% width=10.5cm,
+			scale=0.6,
+			% grid=both, 				% вКлючаем отоБражение сетКи на графиКе
+			%
+			xlabel={$H$}, 			% ПодПись оси X
+			ylabel={$f$}, 			% ПодПись оси Y
+			%
+			major grid style={
+				line width=0.5pt, 	% толщина основных линий сетКи
+				% draw=black!50, 		% цвет основных линий сетКи: 50% черного (80% Белого) 
+				draw=none,
+			},
+			%
+			minor grid style={
+				line width=0.5pt, 	% толщина Промежуточных линий сетКи
+				% draw=black!20,		% цвет Промежуточных линий сетКи
+				draw=none,
+			},
+			%
+			% minor x tick num=0,		% Количество Промежуточных линий между основными
+			% minor y tick num=0,		% Количество Промежуточных линий между основными
+			%
+ 			ticklabel style={
+ 				scale=0.95			% уменьшим размер ПодПисей метоК на осях
+ 			},    
+ 			%
+ 			% ticks=none,
+	    	axis lines=middle, 		% выравнивание оси y:  middle (в нуле)|left|right
+	    	%
+			% ymin = 7,% маКсимумы и минимумы осей на графиКе
+			% ymax = 10,
+			% ymax = 0.28,
+			% ymin = -2,
+			% ymax= 1.5,
+    		x label style={
+    		at={(current axis.right of origin)}, 
+            xshift=1ex, anchor=center
+    		},
+			enlargelimits=true,
+			ymin = 0,	
+			% xmax = 8,
+			% xmin=-3*pi/2*0.8,
+			% xmax=2*pi,
+			% xmin=-2*pi,
+			% xmax=7.5,
+			% ymin=-2.1,
+			% ymax=0.5,
+			% ymin=-2.25,
+			 % clip=false,
+		  restrict y to domain=0:200,
+		  restrict x to domain=0:200,
+		  unbounded coords=jump,
+			%
+			% xtick distance=1,		% расстояние между метКами По оси X
+			% ytick distance=1/50,		% расстояние между метКами По оси Y
+				xticklabels={},
+				yticklabels={},
+				xtick=\empty,
+				ytick=\empty,
+			% disabledatascaling,
+			% ymin={-11/16},
+			% extra y ticks={-9/16,-6/16},	% доПолнительные метКи на осях
+			extra x ticks={0.3},	% доПолнительные метКи на осях
+			extra x tick labels={	% можно уКазать сПециальные ПодПиси К ним
+					{$\delta$},
+			% 		{$\frac{\pi}{a}$}
+				}, 		
+			extra y ticks={1},	% доПолнительные метКи на осях
+			extra y tick labels={	% можно уКазать сПециальные ПодПиси К ним
+					{$\mathrm{const}$}
+				}, 					
+			%
+			% unit vector ratio = 2.5 1,% масштаБ 1:1 осей X и Y
+			% x={(1cm/1.3,0cm)}, y={(0cm,50cm/1.3)},
+			%
+			% x axis line style ={draw=none},
+			% x axis line style ={d},
+			 xmin=0,
+			 ymin=0,
+			 % xmax=1,
+			 % ymax=10/,
+			x axis line style ={->},
+			y axis line style ={->},
+	      % y tick/.style={
+	      %   draw=none,
+	      %   % semithick,
+	      % },
+			x label style={
+				xshift=0.5em,
+				% at={(axis description cs:1.05,0)},
+				% anchor=center,		% расПоложение метКи ровно в точКе (1.1,0)
+				% rotate=360,			% вооБще метКу еще можно Повернуть)
+				% black				% цвет метКи
+			},
+    		y label style={
+    			% at={(axis description cs:0.01,1.07)},
+    			yshift=1em,
+    			anchor=center,		% расПоложение метКи ровно в точКе (0,1.1)
+    			black				% цвет метКи
+    		},			
+			%							
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%s%%%%%%%%%%%%%%%%%%%%
+			% stressstrainset
+		]
+		
+		% \addplot[dashed, blue!50,domain={-3*pi/2:3*pi/2},samples=1000] {tan(deg(x))};
+
+		% \addplot[black, domain={-3*pi/2:3*pi/2},samples=1000] {x*tan(deg(x))};
+
+		% \pgfplotsinvokeforeach{0.851,0.97,...,1.9}{%
+		% 	\draw[dashed, black!20, xshift=2pt] (#1,0) node [red,thick,scale=0.8] {$\times$};
+		% }
+
+		% \begin{scope}[opacity=0.5]
+		% \xdef\w{(pi/2+pi/4)}
+		% \addplot[red, domain={-\w:\w},samples=1000] {2.5*sqrt(\w^2-x^2)};
+
+		% \draw[fill=black] (1.315,4.9) circle (0.5pt);
+		% \draw[fill=black] (-1.315,4.9) circle (0.5pt);
+		% \draw[dashed,black] (-1.315,4.9) -- (1.315,4.9);			
+		% \end{scope}
+
+
+
+		% \xdef\w{(pi+pi/4)}
+
+		% \draw[thick,cyan] (0,-0.4) to [out=0,in=140] (0.6,-1);
+		% \draw[thick,magenta] (0.6,-1) to [out=-80,in=180] (1.6,-2);
+		% % \draw[red,thick, dashed] (0.811,0) -- (2.028,0);
+		\addplot[domain={0:0.6},samples=1000,blue] {tanh(x*6)};
+
+		% \draw[blue,<-, >=latex] (0.7,{10*sqrt(1-0.7)}) -- (0,{10*sqrt(1-0.7)});
+		% \draw[blue,<-, >=latex] (0.5,{10*sqrt(1-0.5)}) -- (0,{10*sqrt(1-0.5)});
+		% \draw[blue,<-, >=latex] (0.85,{10*sqrt(1-0.85)}) -- (0,{10*sqrt(1-0.85)});
+		% \draw[blue,<-, >=latex] (0.95,{10*sqrt(1-0.95)}) -- (0,{10*sqrt(1-0.95)});
+		% \draw[blue,<-, >=latex] (0.24,{10*sqrt(1-0.24)}) -- (0,{10*sqrt(1-0.24)});
+		% \draw[dashed] (1,2) -- (1,0);
+		% \draw[magenta, fill=white,thick] (1,2) circle (1.2pt);
+		% \addplot[domain={0.6:0.811},samples=1000,thick,green] {-(x*1.8-1.42*1.8)^2+1.2};
+		% \addplot[domain={2.028:2.17},samples=1000,thick,magenta] {-(x*1.8-1.42*1.8)^2+1.2};
+		% \draw[fill=magenta] (0.6,-1) circle (1pt);
+
+		% \addplot[domain={0:1.5*pi},samples=1000,red] {1};% node [below,pos=0.75,sloped] {$\omega=\pm vk$};
+
+		% \draw[dashed, black!35] (pi,0) -- (pi,{sqrt(pi^2+1)});
+		% \draw[dashed, black!35] (-pi,0) -- (-pi,{sqrt(pi^2+1)});
+		% \def\H{3.77}\def\X{2.69}
+		% \draw[fill=black,dashed] (\H,\X) circle (0.5pt) -- (-\H,\X) circle (0.5pt);
+
+		% \def\HH{1.43}\def\XX{9.19}
+		% \draw[fill=black,dashed] (\HH,\XX) circle (0.5pt) -- (-\HH,\XX) circle (0.5pt);
+
+		% \draw (0,4) node[left] {$E_1$};
+
+
+		% % \draw (-3,1) -- node[above] {$U_1$} (-2,1) -- (-2,0) -- node[below] {$U_2$} (-1,0) -- (-1,1.5) -- node[above] {$U_3$} (0.5,1.5) -- (0.5,1) -- node[above] {$U_4$} (2,1);
+
+		% \draw (-3,0) -- node[above] {$0$} (-1,0) -- (-1,-1.5) -- node[below] {$U_0$} (1,-1.5) -- (1,0) -- node[above] {$0$} (3,0); 
+
+		% \draw[fill=magenta!20] (-2,-0.75) circle (0.5em) node {1};
+		% \draw[fill=magenta!20] (2,-0.75) circle (0.5em) node {1};
+		% \draw[fill=magenta!20] (0,-0.75) circle (0.5em) node {2};
+		% % \draw[fill=magenta!20] (-1.5,0.5) circle (0.5em) node {2};
+		% % \draw[fill=magenta!20] (-.25,0.5) circle (0.5em) node {3};
+		% % \draw[fill=magenta!20] (1.25,0.5) circle (0.5em) node {4};
+		% % \draw[fill=magenta!20] (-2.5,0.5) circle (0.65em) node {1};
+
+     \end{axis}
+  %    		\foreach \x in {0,1,2}{
+		% 	\draw (\x,0) -- (\x,1);
+		% }
+	\end{tikzpicture}	
+\end{document}

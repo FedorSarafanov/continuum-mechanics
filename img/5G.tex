@@ -1,0 +1,223 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{tikz}
+\input{colors}
+\usetikzlibrary{quotes,angles,calc,decorations.markings,babel,patterns}
+\usepackage[outline]{contour}
+\contourlength{1.4pt} 
+% GNUPL
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt]
+        \draw[densely dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[densely dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[fill=white] {#4} (b);
+    \end{scope}
+}
+
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+
+
+\begin{document}
+\pagestyle{empty}
+
+
+\begin{tikzpicture}[
+    arrowline/.style={black!60},
+    scale=0.75,
+    kos/.style={black},
+    tangent/.style={
+        decoration={
+            markings,% switch on markings
+            mark=
+                at position #1
+                with
+                {
+                    \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,0pt);
+                    \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (1,0pt);
+                    \coordinate (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,1);
+                }
+        },
+        postaction=decorate
+    },
+    use tangent/.style={
+        shift=(tangent point-#1),
+        x=(tangent unit vector-#1),
+        y=(tangent orthogonal unit vector-#1)
+    },
+    use tangent/.default=1
+    ]
+ 
+    % \draw (0,0) -- (1,1) node {a};
+    % \draw (0,0) circle (1); 
+    % \draw[fill=black!20] (0,0)  circle (0.03);
+    % \draw[fill=black] (0,0) circle (0.05);
+    \newcommand{\gamm}[3]{
+        \draw[,#3] (#1,#2) circle (0.2);
+        \draw[->,#3] (#1,#2) ++(90:0.2) -- ($(#1,#2)+(100:0.2)$);
+        \draw[fill=black,#3] ((#1,#2)  circle (0.05);
+    }
+
+    \gamm{1}{0.75}{};
+    \gamm{1}{-0.75}{black!40};
+    \gamm{-1}{-0.75}{black!40};
+    \gamm{-1}{0.75}{black!40};
+    \draw[densely dashed, black!40] (1,0.75) -- (1,-0.75)
+                                    (-1,0.75) -- (-1,-0.75)
+                                    (-1,-0.75) -- (1,-0.75)
+                                    (-1,0.75) -- (1,0.75);
+
+    \draw[thick,->] (0.35,1.75) to[out=-90, in=180, looseness=0.6] (1.75,0.35); 
+    % \draw (90:1.5) circle (0.2);
+    % \draw (0:0) circle (0.2);
+    % \draw[->] (90:1.5) ++(90:0.2) -- ($(90:1.5)+(100:0.2)$);
+    % \draw[->] (90:0) ++(90:0.2) -- ($(90:0)+(100:0.2)$);
+
+    % \draw[->] (0:0) -- ++ (0.5,0);
+    % \draw[->] (90:1.5) -- ++ (0.5,0);
+
+    \draw[pattern=north east lines, pattern color=blue, draw=none] (-0.2,0) rectangle ++(2.2,-0.2);
+    \draw[pattern=north east lines, pattern color=blue, draw=none] (0,0) rectangle ++(-0.2,2);
+
+        \draw (0,0) -- (2,0);
+    \draw (0,0) -- (0,2);
+    % \draw (-2,0.75) -- ++(4,0);
+
+    % % \draw[densely dashed] (0:1) -- node[above] {$l$} (180:1);
+
+    % % \draw[->] (20:1) -- (22:1);
+    % % \draw[->] (200:1) -- (202:1);
+    % \draw[fill=black] (0:0)  circle (0.05) node[left=0.5em] {$\Gamma$};
+    % \draw[fill=black] (90:1.5)  circle (0.05) node[left=0.5em] {$\Gamma$};
+     % \draw[thick] (0,0) pic[black, -{>[length=1mm,width=1.2mm]}]{carc=0:370:0.5cm} node {sa};
+\end{tikzpicture}
+\end{document}
+
+
+
+
+   % \foreach \y in {-0.5,-0.25,0,0.25,0.5}{
+    % \draw[-latex] (0,\y) -- ++ (1,0);
+    % }
+    % \draw (1,0.5) node[right] {$\vec{v}$};
+
+    % \draw (0,0) node[below=0.2em] {$\vec{\Omega}$};
+  %   \draw (2.5,-0.5) node [below] {Поток};
+  %   \foreach \y in {-0.4,-0.2,0,0.2,0.4}{
+  %   \draw[white] (-3,\y) -- ++ (1,0);
+  %   }
+
+  % \draw[thick] (0,0) pic[black, -latex]{carc=-20:20:1.3cm};
+    % \foreach \r in {0.2,0.4,...,0.8}{
+    % \draw[decoration={markings, mark=at position 0 with {\arrow{<}}},
+    %     postaction={decorate}] (0,0) circle (\r);
+    % }
+
+    % \draw[->] (-2,0) -- (2,0) node[right] {$x$};
+    % \draw[->] (0,-2) -- (0,2) node[above] {$y$};
+
+    % \draw[decoration={markings, mark=at position 0 with {\arrow{>}}},
+    %      postaction={decorate}] (0,0.8) circle (0.8);
+    % \draw[decoration={markings, mark=at position 0 with {\arrow{>}}},
+    %      postaction={decorate}] (0,0.5) circle (0.5);
+
+    % \draw[decoration={markings, mark=at position 0 with {\arrow{<}}},
+    %      postaction={decorate}] (0,-0.8) circle (0.8);
+    % \draw[decoration={markings, mark=at position 0 with {\arrow{<}}},
+    %      postaction={decorate}] (0,-0.5) circle (0.5);
+
+    % \draw[densely dashed] (0.9,0) circle (0.9);
+    % \draw[densely dashed] (-0.9,0) circle (0.9);
+
+    % \draw[fill=black!10] (0,0) circle (1);
+    % \fill[black] (0,0) circle (1.2pt);
+    % \draw[->] (0,0) -- node {\contour{white}{$R$}} ++(60:1);
+    % \foreach \x in {0.2,0.4,...,1.8}{
+    % \draw[->] (\x,-0.2) -- ++(0,1.4);
+    % }
+    % \draw (2,0.5) node[right] {$\varphi=\mathrm{const}$};
+    % \draw (0,0.5) node[left,white] {$\varphi=\mathrm{const}$};
+    % \draw (1,1.2) node[above] {$\Psi=\mathrm{const}$};
+    % \draw[tangent=0.6,tangent=0,arrowline] (0,0.8)  to [out=0,in=120] node[sloped,pos=0.5]{\tikz{\draw[->,arrowline](0,0) -- ++(0.1,0)}} (3,1.2);
+
+    % \draw [use tangent=1,->,kos] (0,0) -- (0.75,0) node[right] {$\vec{v}$};
+    % \draw [use tangent=2,->,kos] (0,0) -- (0.75,0) node[right] {$\vec{v}$};
+    % \draw[tangent=0.79,arrowline] (0,0)  to [out=0,in=120] node[sloped,pos=0.5]{\tikz{\draw[->,arrowline](0,0) -- ++(0.1,0)}} (3,0);
+    % \draw [use tangent,->,kos] (0,0) -- (0.75,0) node[right] {$\vec{v}$};
+
+
+    % \draw[->] (0,0) -- ++(-30:1) node[right] {$r$};
+    % \draw[draw=none] (0,0) -- ++(180+30:1) node[left,white] {$r$};
+
+    % \fill[myblue] (-0.7,0) rectangle (0.7,2);
+    % \draw[fill=myblue, densely dashed] (0,0) ellipse (0.7 and 0.3);
+    % \draw[fill=myblue] (0,2) ellipse (0.7 and 0.3);
+    % \draw (0.7,0) -- ++ (0,2);
+    % \draw (-0.7,0) -- ++ (0,2);
+    % \begin{scope}
+    % \clip (-0.7,0) rectangle (0.7,-0.4);
+    % \draw[] (0,0) ellipse (0.7 and 0.3);    
+    % \end{scope}
+
+    % \draw[->] (0,2) -- (0,2.5) node[above] {$z$};
+    % \draw[densely dashed] (0,2) -- (0,0) -- ++ (-30:1);
+
+    % \draw[-latex] (0.35,2) -- ++ (0,0.5) node[right] {$\vec{\Omega}$};
+
+
+    % % \draw (0,0) node[scale=0.7] {$\bigodot$} node[left=0.2em] {\contour{white}{$z$}} [fill=white, draw=none] circle (3.2pt);
+
+    % \draw[domain=1:2.7,smooth, samples=100,variable=\r,blue] plot 
+    %     ({\r},{1.5-1/2/\r^2}); 
+
+    % \draw[domain=0:1,smooth,variable=\r,blue] plot 
+    %     ({\r},{1.5-1+\r^2/2});
+
+    % \draw[densely dashed] (1,0) node[below] {$R$} -- (1,1);
+    % \draw[densely dashed] (0,1.5) node[left] {$p_0$} -- ++(2.7,0);
+
+
+
+
+    % \draw (0,0) node[below] {$\Gamma_k (x_k,y_k)$};
+    % \draw (0,0) [fill=black] circle (1.5pt);
+
+
+    % \draw (2,1.5) [fill=black] circle (1.5pt) node[right] {$\Gamma_i (x_i,y_i)$};
+    % \draw[densely dashed] (2,0) coordinate (a) node[below] {$x_i$} -- (2,1.5);
+    % \draw[densely dashed] (0,1.5) node[left] {$y_i$} -- (2,1.5);
+
+    % \draw[densely dashed] (0,0) coordinate (b) -- (2,1.5) coordinate (c);
+
+    % \pic [draw, ->, "$\theta$", angle eccentricity=1.5] {angle = a--b--c};
+
+    % \draw[->] (2,1.5) -- ++ ({atan(1.5/2)+90}:0.8) coordinate (B);
+    % \draw[densely dashed] (2,1.5) -- ++ ({90}:0.8) coordinate (A);
+
+    % \pic [draw, ->, "$\theta$", angle eccentricity=1.5] {angle = A--c--B};
+    % \coordinate (G) at (1,1); \def\num{2} \def\ang{30}
+    % \draw[->]  (G) node[below] {$\Gamma_\num$} -- ++ (\ang:0.5)  node[above] {$\vec{v}_\num$};
+    % \draw (G) [fill=black] circle (1.5pt);
+
+    % \coordinate (G) at (2,-0.3); \def\num{i} \def\ang{170}
+    % \draw[->]  (G) node[below] {$\Gamma_\num$} -- ++ (\ang:0.5)  node[above] {$\vec{v}_\num$};
+    % \draw (G) [fill=black] circle (1.5pt);
