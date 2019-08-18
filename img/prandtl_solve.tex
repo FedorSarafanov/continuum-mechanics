@@ -1,0 +1,51 @@
+\documentclass{standalone}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{matrix}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{groupplots}
+\pgfkeys{/pgf/number format/.cd,fixed,precision=3}
+\pgfplotsset{
+    compat=newest, 
+}
+% \geometry		
+% 	{
+% 		left			=	2cm,
+% 		right 			=	2cm,
+% 		top 			=	2cm,
+% 		bottom 			=	2cm,
+% 		bindingoffset	=	0cm
+% 	}
+\begin{document}
+	\begin{tikzpicture}[]
+		 \begin{groupplot}[
+		 	scale=0.6,
+		    group style = {
+		     	group size = 3 by 1,
+				horizontal sep=50pt,
+				vertical sep=50pt
+		    },
+		    % unit vector ratio*=1 1 1,
+    		% xmin=-5.5, xmax=5.5,
+    		% ymin=-5.5, ymax=5.5,		     
+		    ]
+		    \nextgroupplot[title={}, xlabel={$\xi$}, ylabel={$f$}]
+		     	\addplot +[blue, semithick, no marks] 
+					plot table [
+						x=t, 
+						y=y
+					]{data/prandtl.tsv};
+		    \nextgroupplot[title={}, xlabel={$\xi$}, ylabel={$f'$}]
+		     	\addplot +[blue, semithick, no marks] 
+					plot table [
+						x=t, 
+						y=dy
+					]{data/prandtl.tsv};
+		    \nextgroupplot[title={}, xlabel={$\xi$}, ylabel={$f''$}]
+		     	\addplot +[blue, semithick, no marks] 
+					plot table [
+						x=t, 
+						y=ddy
+					]{data/prandtl.tsv};
+		  \end{groupplot}
+	\end{tikzpicture}	
+\end{document}

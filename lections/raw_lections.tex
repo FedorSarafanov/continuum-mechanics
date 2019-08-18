@@ -3451,6 +3451,7 @@ $\pdv{z}$, так как
 
 Итак, мы нашли давление и можем перейти от трёх уравнений к двум. При этом лапласиан можно упростить, так как $\pdv{x} \ll \pdv{z}$, и в итоге получаем систему уравнений Прандля:
 \begin{gather}
+	\label{eq:prandtl}
     \left\{\begin{aligned}
         &v_x \pdv{v_x}{x}+v_z\pdv{v_x}{z}=\nu\pdv[2]{v_x}{z}, \quad
         \qty(-\frac{1}{\rho}\pdv{p}{x}=0)\\
@@ -3578,28 +3579,30 @@ $\pdv{z}$, так как
 \end{equation}
 \begin{gather}
     v_x = \pdv{\Psi}{z} = v_0 f(\xi), \quad
-    v_z = -\pdv{\Psi}(x) = \\ = -v_0 \pdv{h}{x} f - v_0 h \pdv{f}{\xi} \pdv{\xi}{x} = -v_0 \qty(h'(x)f - hf' \frac{zh'}{h^2})
+    v_z = -\pdv{\Psi}{x} = \\ = -v_0 \pdv{h}{x} f - v_0 h \pdv{f}{\xi} \pdv{\xi}{x} = -v_0 \qty(h'(x)f - hf' \frac{zh'}{h^2})
 \end{gather}
-Подставив все в уравнение (), получим нелинейное уравнение в обычных производных третьего порядка:
+Подставив $v_x$ и $v_z$ в уравнения \eqref{eq:prandtl}, получим нелинейное уравнение в обычных производных третьего порядка, при этом граничные условия -- зануление скоростей на границах:
 \begin{equation}
-    1/2 f f'' +f''' = 0
+	\label{eq:fff}
+    \frac12 f f'' +f''' = 0, \qquad f(\xi=0)=f'(\xi=0)=0, \quad f'(\infty) = 1 
 \end{equation}
-Граничное условие равенства нулю скоростей на границах:
-\begin{equation}
-    f=f'=0, \quad \xi = 0 
-\end{equation}
-Ещё одно условие следует из $v_z = v_0$ на бесконечности:
-\begin{equation}
-    f'(\infty) = 1 
-\end{equation}
-Численное решение даёт
+Последнее граничное условие следует из $v_z = v_0$ на бесконечности.
+
+Такое дифференциальное уравнение аналитически решить нельзя, но можно воспользоваться численным решением (см. рис. \eqref{fig:prandtl_solve}), которое дает
 \begin{equation}
     f(\xi)  = \frac{1}{2} \alpha \xi^2 + \ldots, \qq{где} 
-        \alpha \approx 0.33 
+        \alpha \approx 0.332
         \quad\Rightarrow\quad 
-        f'' = 0.33
+        f''(0) = 0.332
 \end{equation}
-Теперь можем найти силу (учтя, что мы взяла $v_x = v_0 f'(\xi)$):
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{img/prandtl_solve}
+    \vspace{-1.5em}
+    \caption{Численное решение уравнения \eqref{eq:fff}}
+    \label{fig:prandtl_solve}
+\end{figure}
+Теперь можем найти силу, учтя, что мы взяли $v_x = v_0 f'(\xi)$:
 \begin{equation}
     f_x = \eta \pdv{v_x}{z}
 \end{equation}
@@ -3608,6 +3611,7 @@ $\pdv{z}$, так как
     F = 1.33\, \rho  b\, L^{\frac{1}{2}}\cdot v_0^{\frac{3}{2}}\cdot \nu^{\frac{1}{2}}
 \end{equation}
 
+\newpage
 \paragraph{Обтекание реального тела. } Пусть на некоторое тело набегает поток. Можем ввести криволинейную систему координат таким образом, что $x$ идёт вдоль поверхности тела, а $z$ по нормали  к ней. Тогда уравнения будут похожи:
 \begin{equation}
     v_x \pdv{v_x}{x}+ v_z \pdv{v_x}{z}= \nu \pdv[2]{v_x}{z}- \frac{1}{\rho}\pdv{p}{x}=0
