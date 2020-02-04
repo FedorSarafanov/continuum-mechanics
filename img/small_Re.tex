@@ -1,0 +1,244 @@
+\documentclass[tikz]{standalone}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+% \usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb,physics}
+\usepackage{tikz}
+\usetikzlibrary{quotes,angles,calc,decorations.markings,patterns,babel,arrows}
+% GNUPL
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt]
+        \draw[densely dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[densely dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[fill=white] {#4} (b);
+    \end{scope}
+}
+\begin{document}
+\pagestyle{empty}
+
+
+\begin{tikzpicture}[
+    scale=1, 
+    arrowline/.style={black},
+    kos/.style={black},
+    tangent/.style={
+        decoration={
+            markings,% switch on markings
+            mark=
+                at position #1
+                with
+                {
+                    \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,0pt);
+                    \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (1,0pt);
+                    \coordinate (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt,1);
+                }
+        },
+        postaction=decorate
+    },
+    use tangent/.style={
+        shift=(tangent point-#1),
+        x=(tangent unit vector-#1),
+        y=(tangent orthogonal unit vector-#1)
+    },
+    use tangent/.default=1
+    ]
+
+
+    \def\TO{\tikz{\draw[->,arrowline](0,0) -- ++(0.1,0)}}
+    \def\BA{\tikz{\draw[<-,arrowline](0,0) -- ++(0.1,0)}}
+
+
+\matrix[column sep=0.5cm, row sep=0.5cm] {
+
+    \draw[arrowline] 
+        (0,0.4)  
+        to [out=0,in=180] ++(1,0.2) 
+        to [out=0,in=180] node[sloped,pos=1]{\TO} ++ (1,-0.2);
+
+    \draw[arrowline] 
+        (0,-0.4)  
+        to [out=0,in=180] ++(1,-0.2) 
+        to [out=0,in=180] node[sloped,pos=1]{\TO} ++ (1,0.2);
+
+    \draw[arrowline] 
+        (0,0.2)  
+        to [out=0,in=180] ++(1,0.3) 
+        to [out=0,in=180] node[sloped,pos=1]{\TO} ++ (1,-0.3);
+
+    \draw[arrowline] 
+        (0,-0.2)  
+        to [out=0,in=180] ++(1,-0.3) 
+        to [out=0,in=180] node[sloped,pos=1]{\TO} ++ (1,0.3);
+
+    \draw[arrowline] 
+        (0,0)  
+        to [out=0,in=180] ++(1,-0) 
+        to [out=0,in=180] node[sloped,pos=1]{\TO} ++ (1,0);
+    
+    \draw[ fill=white,draw=black] (1,0) circle (0.4);
+    \draw[pattern=north east lines,draw=black] (1,0) circle (0.4);
+
+    \draw (1,-1) node[scale=0.8] {а) $\mathrm{Re}=10^{-2}$};
+    &
+    \draw (1,-1) node[scale=0.8] {б) $\mathrm{Re}=20$};
+
+
+    \draw[arrowline] 
+        (0,0.4)  
+        to [out=0,in=180] ++(1,0.2) 
+        to [out=0,in=180] ++ (1,-0.2) -- ++ (0.2,0) node[sloped,pos=1]{\TO};
+
+    \draw[arrowline] 
+        (0,-0.4)  
+        to [out=0,in=180] ++(1,-0.2) 
+        to [out=0,in=180] ++ (1,0.2) -- ++ (0.2,0) node[sloped,pos=1]{\TO};
+
+    \draw[arrowline] 
+        (0,0.2)  
+        to [out=0,in=180] ++(1,0.3) 
+        to [out=0,in=180] ++ (1,-0.2) -- ++ (0.2,0) node[sloped,pos=1]{\TO};
+
+    \draw[arrowline] 
+        (0,-0.2)  
+        to [out=0,in=180] ++(1,-0.3) 
+        to [out=0,in=180] ++ (1,0.2) -- ++ (0.2,0) node[sloped,pos=1]{\TO};
+
+    \draw[arrowline] 
+        (0,0)  
+        to [out=0,in=180] ++(1,-0) 
+        to [out=0,in=180] ++ (1,0) -- ++ (0.2,0) node[sloped,pos=1]{\TO};
+
+    \draw[arrowline] 
+        (1,0.4)  
+        to [out=0,in=150]  ++(1.1,-0.4); 
+    \draw[arrowline] 
+        (1,-0.4)  
+        to [out=0,in=-150]  ++(1.1,0.4); 
+    
+    \draw[ fill=white,draw=black] (1,0) circle (0.4);
+    \draw[pattern=north east lines,draw=black] (1,0) circle (0.4);
+
+    \coordinate (A) at (1.63,0.22);
+    \draw [decoration={markings,mark=at position 1 with {\arrow[thick, scale=0.4]{<}}},
+    postaction={decorate}, rotate around={65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.08cm, y radius=0.2cm];
+
+    \coordinate (A) at (1.63,-0.22);
+    \draw [decoration={markings,mark=at position 1 with {\arrow[thick, scale=0.4]{>}}},
+    postaction={decorate}, rotate around={-65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.08cm, y radius=0.2cm];
+
+
+    &
+    \draw (2,-1) node[scale=0.8] {в) $\mathrm{Re}=100$};
+
+
+    \draw[arrowline] 
+        (0,0.4)  
+        to [out=0,in=180] node[sloped,pos=0.2]{\TO} ++ (1.6,0.2) 
+        to [out=0,in=180] node[sloped,pos=0.5]{} ++ (0.8,-0.1) 
+        to [out=0,in=180] node[sloped,pos=0.8]{} ++ (0.8,+0.1) 
+        to [out=0,in=180] node[sloped,pos=0.5]{\TO} ++ (1.1,-0.15) 
+        ;
+
+
+    \draw[arrowline] 
+        (0,0.2)  
+        to [out=0,in=190,looseness=1]   ++(1,0.25)
+        to [out=10,in=160,looseness=1] node[sloped,pos=0.8]{\TO}  ++(0.8,0)
+        to [out=-20,in=80] ++ (0.2,-0.2);
+
+    \draw[arrowline] 
+        (0,-0.2)  
+        to [out=0,in=180] ++(1,-0.3) 
+        to [out=0,in=180] ++ (0.8,0.2) 
+        to [out=0,in=180] ++ (0.8,-0.2) 
+        to [out=0,in=-100] node[sloped,pos=0.5]{\TO} ++ (0.3,0.2)
+        to [out=80,in=-45] node[sloped,pos=0.5]{\BA} ++ (-0.05,0.2);
+
+
+
+    \draw[arrowline] 
+        (1.5,0.1)  
+        to [out=-30,in=180] node[sloped,pos=0.5]{\TO} ++(0.3,-0.1) 
+        to [out=0,in=160] node[sloped,pos=0.5]{\TO} ++ (1.85,0.4) 
+        to [out=-20,in=90] node[sloped,pos=0.5]{\TO} ++ (0.22,-0.2)
+        to [out=-90,in=-10] ++ (-0.12,-0.12)
+        ;
+
+
+    \draw[arrowline] 
+        (2.35,-0.1)  
+        to [out=110,in=190]  ++(0.1,0.15) 
+        to [out=15,in=170,looseness=1] node[sloped,pos=0.5]{\TO} ++ (1.2,-0.35) 
+        to [out=-10,in=200] node[sloped,pos=0.5]{\TO} ++ (0.65,0.05)
+        ;
+
+
+    \draw[arrowline] 
+        (0,-0.4)  
+        to [out=0,in=180] node[sloped,pos=0.3]{\TO} ++ (1,-0.2) 
+        to [out=0,in=180] node[sloped,pos=0.5]{} ++ (0.8,0.1) 
+        to [out=0,in=180] node[sloped,pos=0.5]{} ++ (0.8,-0.1) 
+        to [out=0,in=180] node[sloped,pos=0.5]{\TO} ++ (1.7,+0.15) 
+        ;
+    
+
+
+    \draw[arrowline] 
+        (0,0)  
+        to [out=0,in=180] ++(1,-0);
+
+    \draw[arrowline] 
+        (1,0.4)  
+        to [out=6,in=180-65,looseness=1]  ++(0.8,-0.2); 
+
+    
+    \draw[ fill=white,draw=black] (1,0) circle (0.4);
+    \draw[pattern=north east lines,draw=black] (1,0) circle (0.4);
+
+    \coordinate (A) at (1.66,0.32);
+    \draw [decoration={markings,mark=at position 0.5 with {\arrow[thick, scale=0.4]{<}}},
+    postaction={decorate}, rotate around={65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.1cm, y radius=0.2cm];
+
+    \coordinate (A) at (1.65,0.286);
+    \draw [scale=0.6,decoration={markings,mark=at position 1 with {\arrow[thick, scale=0.4]{<}}},
+    postaction={decorate}, rotate around={65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.1cm, y radius=0.2cm];
+
+
+    \coordinate (A) at (2.66,-0.05);
+    \draw [decoration={markings,mark=at position 0.5 with {\arrow[thick, scale=0.4]{>}}},
+    postaction={decorate}, rotate around={65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.1cm, y radius=0.2cm];
+
+    \coordinate (A) at (2.65,-0.09);
+    \draw [scale=0.6,decoration={markings,mark=at position 1 with {\arrow[thick, scale=0.4]{>}}},
+    postaction={decorate}, rotate around={65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.1cm, y radius=0.2cm];
+
+    \coordinate (A) at (3.66,0.32);
+    \draw [decoration={markings,mark=at position 0.5 with {\arrow[thick, scale=0.4]{<}}},
+    postaction={decorate}, rotate around={65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.1cm, y radius=0.2cm];
+
+    \coordinate (A) at (3.65,0.286);
+    \draw [scale=0.6,decoration={markings,mark=at position 1 with {\arrow[thick, scale=0.4]{<}}},
+    postaction={decorate}, rotate around={65:(A)}] (A) arc [start angle=0, end angle=360, x radius=0.1cm, y radius=0.2cm];
+
+
+
+    \\
+};
+
+
+\end{tikzpicture}
+
+
+\end{document}

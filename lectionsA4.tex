@@ -1,0 +1,275 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+% Шрифты, кодировки, символьные таблицы, переносы
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{lastpage}
+% Пакеты американского математического сообщества
+\usepackage{amssymb,amsfonts,amsmath,amsthm}  
+% Сокращения
+\usepackage{cancel}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+
+% Красная строка
+\usepackage{indentfirst} 
+
+% Ссылки в pdf
+\usepackage[unicode, 
+	colorlinks, 
+	urlcolor=black, 
+	linkcolor=black,
+	citecolor=black
+]{hyperref}
+
+% Таблицы
+\usepackage{makecell,multirow} 
+
+% Графика
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{color} 
+\usepackage{float}
+% \usepackage{subcaption}
+
+% Геометрия страницы
+\usepackage{geometry,tikz}
+\geometry{left=15mm,right=15mm,top=19mm,bottom=19mm,bindingoffset=0cm,headheight=18pt}
+
+% Колонтитулы
+\usepackage{fancyhdr} 
+% применим колонтитул к стилю страницы
+\pagestyle{fancy} 
+%очистим <<шапку>> страницы
+\fancyhead{} 
+%слева сверху на четных и справа на нечетных
+\fancyhead[R]{Лекции С.Н. Гурбатова 2018-2019} 
+% \fancyhead[R]{Сарафанов Ф.Г., Понур К.А. и др.} 
+%справа сверху на четных и слева на нечетных
+\fancyhead[L]{Механика сплошных сред} 
+%очистим <<подвал>> страницы
+\fancyfoot{} 
+% номер страницы в нижнем колинтуле в центре
+\fancyfoot[C]{\thepage} 
+
+% Межстрочный отступ
+\usepackage{setspace}
+\linespread{0.99} % капельку увеличенный
+\frenchspacing % <<французские>> пробелы
+
+% Нумерация
+\renewcommand{\labelenumii}{\theenumii)}
+% В заголовках появляется точка, но при ссылке на них ее нет
+\usepackage{misccorr}
+
+% Содержание
+\usepackage{tocloft}
+\usepackage{secdot}
+\sectiondot{subsection}
+
+% Физика
+\usepackage{physics}
+
+% Новые команды
+\newcommand{\Mean}[1]{\langle#1\rangle}
+\newcommand{\Defi}{\underset{def}{=}}
+\newcommand{\Inte}{\int\limits_{-\infty}^{\infty}} 
+
+\newcommand{\todo}[1]{\textbf{TO DO:} #1}
+
+\addto\captionsrussian{%
+	\renewcommand{\contentsname}{Оглавление}
+	\renewcommand{\partname}{Раздел}%
+}
+\def\thepart{\arabic{part}}
+\usepackage{tocloft}
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}} % for parts
+% \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % for chapters
+% \newlength\mylen
+\renewcommand\thepart{\arabic{part}.}
+% \renewcommand\cftpartpresnum{Лекция~}
+% \renewcommand\cftsecpresnum{Лекция~}
+
+% \setlength{\cftsecnumwidth}{6em}
+% \renewcommand{\cftsecpresnum}{Лекция\ }
+\renewcommand{\cftsecaftersnum}{.}
+
+% \renewcommand{\cftsecaftersnumb}{\newline}
+\renewcommand{\cftsecdotsep}{\cftdotsep}
+\renewcommand{\kappa}{\varkappa}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+% #1: math symbol
+% #2: legend
+\def\alegend#1#2{\overset{\underset{\scriptstyle\downarrow}{\scriptstyle\text{#2}}}{#1}}
+\def\blegend#1#2{\underset{\underset{\scriptstyle\text{#2}}{\scriptstyle\uparrow}}{#1}}
+\def\hp{\hat{p}}
+\def\hx{\hat{x}}
+\def\hH{\hat{H}}
+
+\usepackage[explicit]{titlesec}
+% \titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{Лекция\ \thesection.\ #1}
+\usepackage{epigraph}
+
+
+\newcommand\praktika[1]{
+\stepcounter{section}
+\vspace{1.5em}
+\noindent\textbf{\Large{Занятие \arabic{section}.\hspace{.2em} #1}}
+% \newline 
+\vspace{-0.5em}
+\addcontentsline{toc}{section}{Занятие \arabic{section}.\hspace{.5em} #1}
+}
+
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs=true}
+
+
+% https://tex.stackexchange.com/questions/8720/overbrace-underbrace-but-with-an-arrow-instead
+
+\usepackage{xparse}% http://ctan.org/pkg/xparse
+
+\NewDocumentCommand{\overarrow}{O{=} O{\uparrow} m}{%
+  \overset{\makebox[0pt]{\begin{tabular}{@{}c@{}}$#3$\\[0pt]\ensuremath{#2}\end{tabular}}}{#1}
+}
+\NewDocumentCommand{\underarrow}{O{=} O{\downarrow} m}{%
+  \underset{\makebox[0pt]{\begin{tabular}{@{}c@{}}\ensuremath{#2}\\[0pt]$#3$\end{tabular}}}{#1}
+}
+
+\newcommand\undernoteqty[2]{
+	%
+	\underarrow[
+		\qty(\underbrace{#1})
+	][\uparrow]{\substack{#2}}
+	%
+}
+
+\newcommand{\pvec}[1]{\vec{#1}\mkern2mu\vphantom{#1}}
+% Нормальный вектор для штрихов
+\newcommand{\phat}[1]{\hat{#1}\mkern2mu\vphantom{#1}}
+
+\newcommand\undernote[2]{
+	%
+	\underarrow[
+		#1
+	][\uparrow]{\substack{#2}}
+	%
+}
+
+
+
+% ##############################################################################
+% ##############################################################################
+\newcommand*\dotvec[1][1,1]{\crossproducttemp#1\relax}
+\def\crossproducttemp#1,#2\relax{{\qty[\vec{#1}\times\vec{#2}\,]}}
+
+\newcommand*\prodvec[1][1,1]{\crossproducttempa#1\relax}
+\def\crossproducttempa#1,#2\relax{{\qty[{#1}\times{#2}\,]}}
+% ##############################################################################
+% ##############################################################################
+\usepackage{kbordermatrix}%
+\renewcommand{\kbldelim}{(} % change default array delimiters to parentheses
+\renewcommand{\kbrdelim}{)}
+
+
+\usepackage[inline]{enumitem}
+\usepackage{pifont}
+\usepackage{float}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\Rot}{rot}
+\DeclareMathOperator{\Grad}{grad}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\Sh}{Sh}
+\usepackage{comment}
+\usepackage{makeidx}
+\usepackage{booktabs}
+\makeindex
+
+\begin{document}
+ 
+\begin{titlepage}
+\noindent
+\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{img/fon.png}};
+\noindent{\noindent
+\fontsize{30}{30}\selectfont\bf
+\color{white}
+\noindentС.\,Н.\,ГУРБАТОВ\\[.2em]
+\textcolor{white}{\rule{9cm}{3pt}}\\[.5em]
+\fontsize{36}{36}\selectfont\bf
+\noindentМЕХАНИКА\\[0.4em]
+\noindentСПЛОШНЫХ\\[0.4em]
+\noindentСРЕД}
+\clearpage
+\newpage
+\end{titlepage}
+% \end{document}
+
+\input{titlepage1}
+
+% \input{titlepage}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\hat}{\widehat}
+\newcommand{\const}{\mathrm{const}\,}
+\newcommand{\frc}[2]{\raisebox{2pt}{$#1$}\big/\raisebox{-3pt}{$#2$}}
+\tableofcontents
+
+\newpage
+\sloppy
+
+% \input{lections/lection1}
+% \input{lections/lection2}
+% \input{lections/lection3}
+\input{lections/raw_lections}
+
+\newpage
+\addcontentsline{toc}{section}{Предметный указатель}
+\printindex
+
+% \section*{Список литературы}
+\newpage
+\addcontentsline{toc}{section}{Список литературы}
+\begin{thebibliography}{99}
+% \bibitem{land} Ландау Л.Д., Лифшиц Е.М. Теоретическая физика: т.5, Статистическая физика. - М.: Физматлит, 2005. - 616 с.
+
+\bibitem{nu1} Ландау Л.Д., Лифшиц Е.М. Теоретическая физика, т. 6. Гидродинамика. М:  Физматлит, 2015 – 733 с
+\bibitem{nu2} Бреховских Л.М., Гончаров В.В. Введение в механику сплошных сред (в приложении к теории волн). М.: Наука, 1982. - 335 с
+\bibitem{nu3} Гурбатов С.Н., Грязнова И.Ю., Демин И.Ю., Курин В.В., Прончатов-Рубцов Н.В. Сборник задач по механике сплошных сред: гидромеханика и акустика (учебное пособие) Изд-во ННГУ, Н.Новгород, 2006. - 92 с.
+\bibitem{nu4} Акустика в задачах. Учеб. рук-во. / Под ред. С.Н.Гурбатова и О.В.Руденко. М.: Наука, 2009. - 336 с.
+
+\bibitem{nu5} Кочин Н.Е., Кибель И.А., Розе Н.В. Теоретическая гидродинамика. Т.1, 2. М: Физматлит, 1963.
+\bibitem{nu6} Бетчеллор Дж. Введение в механику жидкости. М: Наука, 1970. 
+\bibitem{nu7} Фейман Р., Лейтон Р., Сэндс М. Феймановские лекции по физике, т. 7. Физика сплошных сред. М: Мир, 1977.
+\bibitem{nu8} Лойцянский Л.Г. Механика жидкости и газа. М: Дрофа, 2003. 840 с.
+\bibitem{nu9} Лайтхилл Д. Волны в жидкостях. М: Мир, 1981. 589 с.
+\bibitem{nu10} Седов Л.И. Механика сплошных сред. В 2-х т. СПб: Лань, 2004. 528 с. и 560 с.
+\bibitem{nu11} Островский Л.А. Вопросы динамики жидкости. Учебное пособие. Горький, ГГУ, 1982. – 145 с.
+
+\bibitem{nu12} Гурбатов С.Н., Грязнова И.Ю., Демин И.Ю., Курин В.В., Прончатов-Рубцов Н.В.  Электронный задачник <<Основы механики сплошных сред: гидромеханика и акустика>>  Фонд образовательных электронных ресурсов ННГУ, 2012. – 95 с. \url{http://www.unn.ru/books/met_files/Zadachnic_MSS.doc}
+\bibitem{nu13} Грязнова И.Ю., Мартьянов А.И. <<Экспериментальные исследования закономерностей обтекания цилиндра и крыла воздушным потоком на аэростенде ТМЖ-1М>>. Электронное учебно-методическое пособие.  Фонд образовательных электронных ресурсов ННГУ, 2012. – 60 с. \url{http://www.unn.ru/books/resources.html}
+\bibitem{nu14} Курин В.В., Грязнова И.Ю., Клемина А.В., Мартьянов А.И. УМК <<Основы механики сплошных сред>> Фонд образовательных электронных ресурсов ННГУ, 2011. – 88 с. \url{http://www.unn.ru/books/resources.html}
+
+
+
+\bibitem{a1} Gurbatov S.N., Saichev A.I., \& Shandarin S.F. 1989, Mon. Not. R. astr. Soc., 236, 385
+
+\bibitem{a2} Гурбатов С.Н., Малахов А.Н., Саичев А.И. Нелинейные случайные волны в средах без дисперсии. М.: Наука, 1990. 215 с. Сер. Современные проблемы.
+
+\bibitem{a20} Gurbatov S.N., Malakhov A.N., Saichev A.I. Nonlinear random waves and turbulence in nondispersive media: waves, rays and particles. — Manchester University Press, 1991. — 308 p.
+
+\bibitem{a3} Vergassola M., Dubrulle B., Frisch U., Noullez A. 1994, Astron. Astrophys. 289. 325.
+
+\bibitem{a4} Гурбатов С. Н., Саичев А. И., \& Шандарин С. Ф.   <<Крупномасштабная структура Вселенной. Приближение Зельдовича и модель слипания>>,  УФН, 182,  233–261 (2012)
+
+\bibitem{a5} Гурбатов С.Н., Руденко О.В., Саичев А.И. Волны и структуры в нелинейных средах без дисперсии. Приложения к нелинейной акустике. М.: Физматлит, 2008.
+
+\bibitem{a60} Gurbatov S.N.,Rudenko O.V., \& Saichev A.I. Waves and Structures in Nonlinear Nondispersive Media. General Theory and Applications to Nonlinear Acoustics. — Springer-Verlag, Berlin, Heidelberg, Germany, 2012. — 472 p . с
+
+\end{thebibliography}
+
+\input{foot}
+
+\end{document}
